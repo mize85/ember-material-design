@@ -115,6 +115,10 @@ var IconService = Ember.Service.extend({
       return Ember.RSVP.Promise.resolve(config[id].clone());
     }
 
+    if(this.iconCache[id]){
+        return Ember.RSVP.Promise.resolve(this.iconCache[id].clone());
+    }
+
     if (urlRegex.test(id)) {
       return this.loadByURL(id)
         .then(function(icon){
