@@ -25,6 +25,7 @@ var MdIcon = Ember.Component.extend(LayoutRules, StyleSafe, {
     }),
 
     loadIcon: Ember.observer('iconName', function() {
+
         var iconName = this.get('iconName'),
             element = this.$();
 
@@ -33,6 +34,7 @@ var MdIcon = Ember.Component.extend(LayoutRules, StyleSafe, {
             var is = this.get('iconService');
             is.getIcon(iconName)
                 .then(function(svg) {
+                    element.empty();
                     element.append(svg);
                 });
         }

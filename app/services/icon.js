@@ -108,6 +108,7 @@ var IconService = Ember.Service.extend({
   getIcon(id) {
     id = id || '';
 
+    var self = this;
 
     // if already loaded and cached, use a clone of the cached icon.
     if (config[id]) {
@@ -116,7 +117,9 @@ var IconService = Ember.Service.extend({
 
     if (urlRegex.test(id)) {
       return this.loadByURL(id)
-        .then(this.cacheIcon(id));
+        .then(function(icon){
+              self.cacheIcon(icon, id)
+          });
     }
 
     if (id.indexOf(':') == -1) {
@@ -127,7 +130,9 @@ var IconService = Ember.Service.extend({
       .catch(Ember.run.bind(this, this.loadFromIconSet))
       .catch(this.announceIdNotFound)
       .catch(this.announceNotFound)
-      .then(this.cacheIcon(id));
+      .then(function(icon){
+            self.cacheIcon(icon, id)
+        });
   },
 
   icon(id, url, viewBoxSize) {
@@ -235,7 +240,7 @@ var IconService = Ember.Service.extend({
     return (typeof target.element !== 'undefined') && (typeof target.config !== 'undefined');
   },
 
-  cacheIcon(id) {
+  cacheIcon(icon, id) {
     var self = this;
     return function updateCache(icon) {
       self.iconCache[id] = self.isIcon(icon) ? icon : new Icon(icon, config[id]);
