@@ -118,7 +118,7 @@ var IconService = Ember.Service.extend({
     if (urlRegex.test(id)) {
       return this.loadByURL(id)
         .then(function(icon){
-              self.cacheIcon(icon, id)
+              return self.cacheIcon(icon, id)
           });
     }
 
@@ -131,7 +131,7 @@ var IconService = Ember.Service.extend({
       .catch(this.announceIdNotFound)
       .catch(this.announceNotFound)
       .then(function(icon){
-            self.cacheIcon(icon, id)
+            return self.cacheIcon(icon, id)
         });
   },
 
@@ -241,9 +241,8 @@ var IconService = Ember.Service.extend({
   },
 
   cacheIcon(icon, id) {
-    var self = this;
-    self.iconCache[id] = self.isIcon(icon) ? icon : new Icon(icon, config[id]);
-    return self.iconCache[id].clone();
+    this.iconCache[id] = this.isIcon(icon) ? icon : new Icon(icon, config[id]);
+    return this.iconCache[id].clone();
   }
 
 });
