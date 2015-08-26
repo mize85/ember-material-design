@@ -242,11 +242,8 @@ var IconService = Ember.Service.extend({
 
   cacheIcon(icon, id) {
     var self = this;
-    return function updateCache(icon) {
-      self.iconCache[id] = self.isIcon(icon) ? icon : new Icon(icon, config[id]);
-
-      return self.iconCache[id].clone();
-    }
+    self.iconCache[id] = self.isIcon(icon) ? icon : new Icon(icon, config[id]);
+    return self.iconCache[id].clone();
   }
 
 });
