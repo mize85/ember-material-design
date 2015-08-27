@@ -198,7 +198,7 @@ var IconService = Ember.Service.extend({
     function extractFromSet(set) {
       var iconName = id.slice(id.lastIndexOf(':') + 1);
       var icon = set.querySelector('#' + iconName);
-      return !icon ? Ember.RSVP.Promise.reject(id) : new Icon(icon, iconSetConfig);
+      return !icon ? Ember.RSVP.Promise.reject(id) : Ember.RSVP.Promise.resolve(new Icon(icon, iconSetConfig);
     }
   },
 
