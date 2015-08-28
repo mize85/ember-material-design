@@ -149,10 +149,18 @@ var IconService = Ember.Service.extend({
         if(iconConfig){
             return this.loadByID(id).then(function(icon) {
                 return icon;
+            }, function(err){
+                return self.loadByID(id).then(function(icon) {
+                    return icon;
+                });
             });
         }else {
             return this.loadFromIconSet(id).then(function (icon) {
                 return icon;
+            }, function(err){
+                return self.loadFromIconSet(id).then(function (icon) {
+                    return icon;
+                });
             });
         }
     },
