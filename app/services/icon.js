@@ -143,18 +143,19 @@ var IconService = Ember.Service.extend({
             id = '$default:' + id;
         }
 
-        return this.loadByID(id).then(function(icon){
-            return self.cacheIcon(icon, id);
 
-        // error -> try load from set
-        },function(err){
-            return self.loadFromIconSet(id).then(function(icon){
+        var iconConfig = config[id];
+
+        if(iconConfig){
+            return this.loadByID(id).then(function(icon) {
                 return self.cacheIcon(icon, id);
-            }, function(err){
-                //self.announceIdNotFound(id);
-            })
-        });
+            });
+        }else{
+            return this.loadFromIconSet(id).then(function(icon){
+                return self.cacheIcon(icon, id);
+            });
 
+        }
     },
 
     icon: function (id, url, viewBoxSize) {
