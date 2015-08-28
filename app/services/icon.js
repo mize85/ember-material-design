@@ -68,7 +68,7 @@ var IconService = Ember.Service.extend({
   iconCache: {},
   templateCache: {},
 
-  preloadIcons() {
+  preloadIcons: function() {
 
     var svgRegistry = [{
       id: 'md-tabs-arrow',
@@ -92,7 +92,7 @@ var IconService = Ember.Service.extend({
 
       }];
 
-    svgRegistry.forEach((asset) => {
+    svgRegistry.forEach(function(asset){
       this.icon(asset.id, asset.url);
       this.templateCache[asset.url] = asset.svg;
     });
@@ -100,12 +100,12 @@ var IconService = Ember.Service.extend({
 
   },
 
-  init() {
+  init: function() {
     this._super(...arguments);
     this.preloadIcons();
   },
 
-  getIcon(id) {
+  getIcon: function(id) {
     id = id || '';
 
     var self = this;
@@ -122,7 +122,7 @@ var IconService = Ember.Service.extend({
     if (urlRegex.test(id)) {
       return this.loadByURL(id)
         .then(function(icon){
-              return self.cacheIcon(icon, id)
+              return Ember.RSVP.Promise.resolve(self.cacheIcon(icon, id))
           });
     }
 
@@ -139,7 +139,7 @@ var IconService = Ember.Service.extend({
         });
   },
 
-  icon(id, url, viewBoxSize) {
+  icon: function(id, url, viewBoxSize) {
     if (id.indexOf(':') == -1) {
       id = '$default:' + id;
     }
@@ -150,14 +150,14 @@ var IconService = Ember.Service.extend({
     };
   },
 
-  iconSet(id, url, viewBoxSize) {
+  iconSet: function(id, url, viewBoxSize) {
     config[id] = {
       url: url,
       viewBoxSize: viewBoxSize || config.defaultViewBoxSize
     };
   },
 
-  defaultIconSet(url, viewBoxSize) {
+  defaultIconSet: function(url, viewBoxSize) {
     var setName = '$default';
 
     if (!config[setName]) {
@@ -168,19 +168,19 @@ var IconService = Ember.Service.extend({
     }
   },
 
-  defaultViewBoxSize(viewBoxSize) {
+  defaultViewBoxSize: function(viewBoxSize) {
     config.defaultViewBoxSize = viewBoxSize;
   },
 
-  loadByID(id) {
+  loadByID: function(id) {
     var iconConfig = config[id];
 
-    return !iconConfig ? Ember.RSVP.Promise.reject(id) : this.loadByURL(iconConfig.url).then(icon => {
+    return !iconConfig ? Ember.RSVP.Promise.reject(id) : this.loadByURL(iconConfig.url).then(function(icon) {
       return Ember.RSVP.Promise.resolve(new Icon(icon, iconConfig));
     });
   },
 
-  loadFromIconSet(id) {
+  loadFromIconSet: function(id) {
     var setName = id.substring(0, id.lastIndexOf(':')) || '$default';
     var iconSetConfig = config[setName];
 
@@ -202,7 +202,7 @@ var IconService = Ember.Service.extend({
     }
   },
 
-  loadByURL(url) {
+  loadByURL: function(url) {
 
     // first check templateCache
 
@@ -217,7 +217,7 @@ var IconService = Ember.Service.extend({
     }
 
     return req
-      .then(response => {
+      .then(function(response) {
         // if its an actual ajax request, just get the response text
         if (response.jqXHR) {
           response = response.jqXHR.responseText;
@@ -232,7 +232,7 @@ var IconService = Ember.Service.extend({
       });
   },
 
-  announceIdNotFound(id) {
+  announceIdNotFound: function(id) {
     var msg;
 
     if (typeof id === 'string') {
@@ -243,17 +243,17 @@ var IconService = Ember.Service.extend({
     return Ember.RSVP.Promise.reject(msg || id);
   },
 
-  announceNotFound(err) {
+  announceNotFound: function(err) {
     var msg = (typeof err === 'string') ? err : (err.message || err.data || err.statusText);
 
     return Ember.RSVP.Promise.reject(msg);
   },
 
-  isIcon(target) {
+  isIcon: function(target) {
     return (typeof target.element !== 'undefined') && (typeof target.config !== 'undefined');
   },
 
-  cacheIcon(icon, id) {
+  cacheIcon: function(icon, id) {
     this.iconCache[id] = this.isIcon(icon) ? icon : new Icon(icon, config[id]);
     return this.iconCache[id].clone();
   }
