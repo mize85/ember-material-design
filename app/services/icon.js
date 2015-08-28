@@ -226,7 +226,7 @@ var IconService = Ember.Service.extend({
 
         for (var i = 0; i < els.length; ++i) {
           if (els[i].nodeName === 'svg') {
-            return els[i];
+            return Ember.RSVP.Promise.resolve(els[i]);
           }
         }
       });
