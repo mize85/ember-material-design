@@ -133,7 +133,7 @@ var IconService = Ember.Service.extend({
     }
 
     return this.loadByID(id)
-      .catch(this.loadFromIconSet)
+      .catch(Ember.run.bind(this, this.loadFromIconSet))
       .catch(this.announceIdNotFound)
       .catch(this.announceNotFound)
       .then(function(icon){
@@ -183,6 +183,7 @@ var IconService = Ember.Service.extend({
   },
 
   loadFromIconSet: function(id) {
+      debugger;
     var setName = id.substring(0, id.lastIndexOf(':')) || '$default';
     var iconSetConfig = config[setName];
 
