@@ -183,18 +183,18 @@ var IconService = Ember.Service.extend({
   },
 
   loadFromIconSet: function(id) {
+
     var setName = id.substring(0, id.lastIndexOf(':')) || '$default';
     var iconSetConfig = config[setName];
 
-    if(iconSetConfig.svg){
-        return Ember.RSVP.Promise.resolve(extractFromSet(iconSetConfig.svg));
-    }
 
     return !iconSetConfig ? Ember.RSVP.Promise.reject(id) : this.loadByURL(iconSetConfig.url).then(handleNewLoadedSet);
 
-    function handleNewLoadedSet(set){
-        iconSetConfig.svg = set;
-        return extractFromSet(iconSetConfig.svg);
+    function handleNewLoadedSet(svg){
+
+        this.icon(id, iconSetConfig.url);
+        this.templateCache[iconSetConfig.url] = svg;
+        return extractFromSet(svg);
     }
 
     function extractFromSet(set) {
