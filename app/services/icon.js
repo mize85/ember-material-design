@@ -151,9 +151,12 @@ var IconService = Ember.Service.extend({
                 return self.cacheIcon(icon, id);
             });
         }else{
-            return this.loadFromIconSet(id).then(function(icon){
-                return self.cacheIcon(icon, id);
-            });
+            Ember.run.debounce(function(){
+                return this.loadFromIconSet(id).then(function(icon){
+                    return self.cacheIcon(icon, id);
+                });
+            }, 10);
+
 
         }
     },
