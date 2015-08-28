@@ -32,6 +32,12 @@ Icon.prototype = {
     prepare: prepareAndStyle
 };
 
+Object.defineProperty(Icon.prototype, 'svg', {
+    get: function() {
+        return this.clone()[0];
+    }
+});
+
 /**
  * Clone the Icon DOM element
  */
@@ -66,6 +72,9 @@ function prepareAndStyle() {
 var IconService = Ember.Service.extend({
 
     iconCache: {},
+
+    iconPromiseCache: Ember.Map.create(),
+
     templateCache: {},
 
     preloadIcons: function () {
@@ -112,15 +121,6 @@ var IconService = Ember.Service.extend({
         this.preloadIcons();
     },
 
-    preloadSets: function(){
-        var self = this;
-
-        for(var id in config){
-            if(!config[id].svg){
-                self.loadFromIconSet(id);
-            }
-        }
-    },
 
     getIcon: function (id) {
         id = id || '';
@@ -128,15 +128,17 @@ var IconService = Ember.Service.extend({
         var self = this;
 
         // if already loaded and cached, use a clone of the cached icon.
-        if (this.iconCache[id]) {
-            return Ember.RSVP.Promise.resolve(this.iconCache[id].clone());
+        if (this.get('iconPromiseCache').has(id)) {
+            return this.get('iconPromiseCache').get(id);
+        }
+
+        // if already loaded and cached, use a clone of the cached icon.
+        if (config[id]) {
+            return Ember.RSVP.Promise.resolve(config[id].clone());
         }
 
         if (urlRegex.test(id)) {
-            return this.loadByURL(id)
-                .then(function (icon) {
-                    return self.cacheIcon(icon, id);
-                });
+            return this.cacheIconPromise(id, this.loadByURL(id));
         }
 
         if (id.indexOf(':') == -1) {
@@ -144,25 +146,12 @@ var IconService = Ember.Service.extend({
         }
 
 
-        var iconConfig = config[id];
 
-        if(iconConfig){
-            return this.loadByID(id).then(function(icon) {
-                return icon;
-            }, function(err){
-                return self.loadByID(id).then(function(icon) {
-                    return icon;
-                });
-            });
-        }else {
-            return this.loadFromIconSet(id).then(function (icon) {
-                return icon;
-            }, function(err){
-                return self.loadFromIconSet(id).then(function (icon) {
-                    return icon;
-                });
-            });
-        }
+
+        return this.cacheIconPromise(id, this.loadByID(id)
+            .catch(Ember.run.bind(this, this.loadFromIconSet))
+            .catch(this.announceIdNotFound)
+            .catch(this.announceNotFound));
     },
 
     icon: function (id, url, viewBoxSize) {
@@ -283,6 +272,18 @@ var IconService = Ember.Service.extend({
             this.iconCache[id] = this.isIcon(icon) ? icon : new Icon(icon, config[id]);
         }
         return this.iconCache[id].clone();
+    },
+
+    cacheIconPromise: function(id, promise){
+        var self = this;
+        var iconCache = this.get("iconPromiseCache");
+        iconCache.set(id, promise.then(function(icon){
+            icon = this.isIcon(icon) ? icon : new Icon(icon, config[id]);
+            iconCache.set(id, Ember.RSVP.Promise.resolve(icon));
+            return iconCache.get(id);
+        }));
+
+        return iconCache.get(id);
     }
 
 });
