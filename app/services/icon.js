@@ -108,10 +108,18 @@ var IconService = Ember.Service.extend({
     },
 
     init: function () {
-        this._super(...arguments
-        )
-        ;
+        this._super(...arguments);
         this.preloadIcons();
+    },
+
+    preloadSets: function(){
+        var self = this;
+
+        for(var id in config){
+            if(!config[id].svg){
+                self.loadFromIconSet(id);
+            }
+        }
     },
 
     getIcon: function (id) {
