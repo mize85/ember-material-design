@@ -150,14 +150,10 @@ var IconService = Ember.Service.extend({
             return this.loadByID(id).then(function(icon) {
                 return self.cacheIcon(icon, id);
             });
-        }else{
-            Ember.run.debounce(function(){
-                return this.loadFromIconSet(id).then(function(icon){
-                    return self.cacheIcon(icon, id);
-                });
-            }, 10);
-
-
+        }else {
+            return this.loadFromIconSet(id).then(function (icon) {
+                return self.cacheIcon(icon, id);
+            });
         }
     },
 
@@ -274,7 +270,10 @@ var IconService = Ember.Service.extend({
     },
 
     cacheIcon: function (icon, id) {
-        this.iconCache[id] = this.isIcon(icon) ? icon : new Icon(icon, config[id]);
+        if(!this.iconCache[id])
+        {
+            this.iconCache[id] = this.isIcon(icon) ? icon : new Icon(icon, config[id]);
+        }
         return this.iconCache[id].clone();
     }
 
