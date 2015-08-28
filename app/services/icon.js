@@ -113,10 +113,6 @@ var IconService = Ember.Service.extend({
     var self = this;
 
     // if already loaded and cached, use a clone of the cached icon.
-    if (config[id]) {
-      return Ember.RSVP.Promise.resolve(config[id].clone());
-    }
-
     if(this.iconCache[id]){
         return Ember.RSVP.Promise.resolve(this.iconCache[id].clone());
     }
