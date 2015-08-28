@@ -135,13 +135,30 @@ var IconService = Ember.Service.extend({
             id = '$default:' + id;
         }
 
-        return this.loadByID(id)
+        /*return this.loadByID(id)
             .catch(Ember.run.bind(this, this.loadFromIconSet))
             .catch(this.announceIdNotFound)
             .catch(this.announceNotFound)
             .then(function (icon) {
                 return self.cacheIcon(icon, id);
-            });
+            });*/
+
+
+        return this.loadByID(id).then(function(icon){
+            return self.cacheIcon(icon, id);
+        },function(err){
+            Ember.Logger.debug(err);
+
+            return self.loadFromIconSet(id).then(function(icon){
+                return self.cacheIcon(icon, id);
+            }, function(err){
+                Ember.Logger.debug(err);
+                debugger;
+            })
+        });
+
+
+
     },
 
     icon: function (id, url, viewBoxSize) {
