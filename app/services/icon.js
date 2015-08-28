@@ -114,17 +114,17 @@ var IconService = Ember.Service.extend({
 
     // if already loaded and cached, use a clone of the cached icon.
     if (config[id]) {
-      return Ember.RSVP.Promise.resolve(config[id].clone());
+      return config[id].clone();
     }
 
     if(this.iconCache[id]){
-        return Ember.RSVP.Promise.resolve(this.iconCache[id].clone());
+        return this.iconCache[id].clone();
     }
 
     if (urlRegex.test(id)) {
       return this.loadByURL(id)
         .then(function(icon){
-              return Ember.RSVP.Promise.resolve(self.cacheIcon(icon, id))
+              return self.cacheIcon(icon, id);
           });
     }
 
@@ -137,7 +137,7 @@ var IconService = Ember.Service.extend({
       .catch(this.announceIdNotFound)
       .catch(this.announceNotFound)
       .then(function(icon){
-            return Ember.RSVP.Promise.resolve(self.cacheIcon(icon, id));
+            return self.cacheIcon(icon, id);
         });
   },
 
@@ -178,7 +178,7 @@ var IconService = Ember.Service.extend({
     var iconConfig = config[id];
 
     return !iconConfig ? Ember.RSVP.Promise.reject(id) : this.loadByURL(iconConfig.url).then(function(icon) {
-      return Ember.RSVP.Promise.resolve(new Icon(icon, iconConfig));
+      return new Icon(icon, iconConfig);
     });
   },
 
@@ -200,7 +200,7 @@ var IconService = Ember.Service.extend({
     function extractFromSet(set) {
       var iconName = id.slice(id.lastIndexOf(':') + 1);
       var icon = set.querySelector('#' + iconName);
-      return !icon ? Ember.RSVP.Promise.reject(id) : Ember.RSVP.Promise.resolve(new Icon(icon, iconSetConfig));
+      return !icon ? Ember.RSVP.Promise.reject(id) : new Icon(icon, iconSetConfig);
     }
   },
 
@@ -228,7 +228,7 @@ var IconService = Ember.Service.extend({
 
         for (var i = 0; i < els.length; ++i) {
           if (els[i].nodeName === 'svg') {
-            return Ember.RSVP.Promise.resolve(els[i]);
+            return els[i];
           }
         }
       });
