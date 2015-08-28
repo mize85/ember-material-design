@@ -70,6 +70,8 @@ var IconService = Ember.Service.extend({
 
   preloadIcons: function() {
 
+      var  self = this;
+
     var svgRegistry = [{
       id: 'md-tabs-arrow',
       url: 'md-tabs-arrow.svg',
@@ -93,8 +95,8 @@ var IconService = Ember.Service.extend({
       }];
 
     svgRegistry.forEach(function(asset){
-      this.icon(asset.id, asset.url);
-      this.templateCache[asset.url] = asset.svg;
+      self.icon(asset.id, asset.url);
+      self.templateCache[asset.url] = asset.svg;
     });
 
 
