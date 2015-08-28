@@ -278,7 +278,7 @@ var IconService = Ember.Service.extend({
         var self = this;
         var iconCache = this.get("iconPromiseCache");
         iconCache.set(id, promise.then(function(icon){
-            icon = this.isIcon(icon) ? icon : new Icon(icon, config[id]);
+            icon = self.isIcon(icon) ? icon : new Icon(icon, config[id]);
             iconCache.set(id, Ember.RSVP.Promise.resolve(icon));
             return iconCache.get(id);
         }));
