@@ -135,7 +135,7 @@ var IconService = Ember.Service.extend({
       .catch(this.announceIdNotFound)
       .catch(this.announceNotFound)
       .then(function(icon){
-            return self.cacheIcon(icon, id)
+            return Ember.RSVP.Promise.resolve(self.cacheIcon(icon, id));
         });
   },
 
