@@ -186,7 +186,7 @@ var IconService = Ember.Service.extend({
         var iconConfig = config[id];
 
         return !iconConfig ? Ember.RSVP.Promise.reject(id) : this.loadByURL(iconConfig.url).then(function (icon) {
-            return self.cacheIcon(new Icon(icon, iconConfig), id);
+            return new Icon(icon, iconConfig);
         });
     },
 
@@ -204,7 +204,7 @@ var IconService = Ember.Service.extend({
 
             var iconName = id.slice(id.lastIndexOf(':') + 1);
             var icon = svg.querySelector('#' + iconName);
-            return !icon ? Ember.RSVP.Promise.reject(id) : self.cacheIcon(new Icon(icon, iconSetConfig), id);
+            return !icon ? Ember.RSVP.Promise.reject(id) : new Icon(icon, iconSetConfig);
         }
 
         return !iconSetConfig ? Ember.RSVP.Promise.reject(id) : this.loadByURL(iconSetConfig.url).then(extractFromSet);
