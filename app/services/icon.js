@@ -184,6 +184,7 @@ var IconService = Ember.Service.extend({
 
   loadFromIconSet: function(id) {
 
+      var self = this;
     var setName = id.substring(0, id.lastIndexOf(':')) || '$default';
     var iconSetConfig = config[setName];
 
@@ -192,8 +193,8 @@ var IconService = Ember.Service.extend({
 
     function handleNewLoadedSet(svg){
 
-        this.icon(id, iconSetConfig.url);
-        this.templateCache[iconSetConfig.url] = svg;
+        self.icon(id, iconSetConfig.url);
+        self.templateCache[iconSetConfig.url] = svg;
         return extractFromSet(svg);
     }
 
