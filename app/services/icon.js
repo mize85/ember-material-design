@@ -176,7 +176,7 @@ var IconService = Ember.Service.extend({
     var iconConfig = config[id];
 
     return !iconConfig ? Ember.RSVP.Promise.reject(id) : this.loadByURL(iconConfig.url).then(icon => {
-      return new Icon(icon, iconConfig);
+      return Ember.RSVP.Promise.resolve(new Icon(icon, iconConfig));
     });
   },
 
