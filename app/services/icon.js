@@ -114,11 +114,11 @@ var IconService = Ember.Service.extend({
 
     // if already loaded and cached, use a clone of the cached icon.
     if (config[id]) {
-      return config[id].clone();
+      return Ember.RSVP.Promise.resolve(config[id].clone());
     }
 
     if(this.iconCache[id]){
-        return this.iconCache[id].clone();
+        return Ember.RSVP.Promise.resolve(this.iconCache[id].clone());
     }
 
     if (urlRegex.test(id)) {
