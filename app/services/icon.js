@@ -71,8 +71,6 @@ function prepareAndStyle() {
 
 var IconService = Ember.Service.extend({
 
-    iconCache: {},
-
     iconPromiseCache: Ember.Map.create(),
 
     templateCache: {},
@@ -144,9 +142,6 @@ var IconService = Ember.Service.extend({
         if (id.indexOf(':') == -1) {
             id = '$default:' + id;
         }
-
-
-
 
         return this.cacheIconPromise(id, this.loadByID(id)
             .catch(Ember.run.bind(this, this.loadFromIconSet))
@@ -266,13 +261,6 @@ var IconService = Ember.Service.extend({
         return (typeof target.element !== 'undefined') && (typeof target.config !== 'undefined');
     },
 
-    cacheIcon: function (icon, id) {
-        if(!this.iconCache[id])
-        {
-            this.iconCache[id] = this.isIcon(icon) ? icon : new Icon(icon, config[id]);
-        }
-        return this.iconCache[id].clone();
-    },
 
     cacheIconPromise: function(id, promise){
         var self = this;
