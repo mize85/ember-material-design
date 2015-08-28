@@ -133,7 +133,7 @@ var IconService = Ember.Service.extend({
     }
 
     return this.loadByID(id)
-      .catch(Ember.run.bind(this, function(){return this.loadFromIconSet(id)}))
+      .catch(this.loadFromIconSet)
       .catch(this.announceIdNotFound)
       .catch(this.announceNotFound)
       .then(function(icon){
