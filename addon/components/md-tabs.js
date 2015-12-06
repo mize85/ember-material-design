@@ -230,7 +230,7 @@ var MdTabs = Ember.Component.extend(Ember.Evented, LayoutRules, RippleMixin, {
         }
         var canvasWidth = this.$().prop('clientWidth');
         
-        if(this.elements.tabs){
+        if(this.elements.tabs.forEach){
           this.elements.tabs.forEach(function(tab){
             canvasWidth -= tab.offsetWidth;
           });
