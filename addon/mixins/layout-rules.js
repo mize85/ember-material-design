@@ -38,7 +38,7 @@ var LayoutRulesMixin = Ember.Mixin.create({
     var self = this;
 
     layoutProperties.forEach(function(layoutProperty){
-        self.get('sizeNames').forEach(function(sizeName){
+        sizeNames.forEach(function(sizeName){
             ret.push(layoutProperty + '-' + sizeName);
         });
     
@@ -46,7 +46,7 @@ var LayoutRulesMixin = Ember.Mixin.create({
         ret.push('show');
     });
     
-    ret.push.apply(ret, layoutSingleRules);
+    ret.push.apply(ret, layoutSingleRules));
     
     return ret;
   }),
