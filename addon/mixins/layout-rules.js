@@ -33,7 +33,7 @@ const sizeNames = [
 
 var LayoutRulesMixin = Ember.Mixin.create({
   
-  finalRules Ember.computed(function(){
+  finalRules: Ember.computed(function(){
     var ret = [];
     var self = this;
 
