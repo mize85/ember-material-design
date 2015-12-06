@@ -30,9 +30,10 @@ const sizeNames = [
 ];
 
 var finalRules = [];
+var self = this;
 
-Ember.EnumerableUtils.forEach(layoutProperties, (layoutProperty) => {
-    Ember.EnumerableUtils.forEach(sizeNames, (sizeName) => {
+this.get('layoutProperties').forEach(function(layoutProperty){
+    self.get('sizeNames').forEach(function(sizeName){
         finalRules.push(layoutProperty + '-' + sizeName);
     });
 
