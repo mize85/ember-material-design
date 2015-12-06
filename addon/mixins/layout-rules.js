@@ -51,7 +51,7 @@ var LayoutRulesMixin = Ember.Mixin.create({
     return ret;
   }),
 
-    attributeBindings: finalRules
+    attributeBindings: ['finalRules']
 
 });
 
