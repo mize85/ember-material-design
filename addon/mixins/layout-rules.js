@@ -31,24 +31,27 @@ const sizeNames = [
 
 
 
-finalRules.push.apply(finalRules, layoutSingleRules);
-
 var LayoutRulesMixin = Ember.Mixin.create({
   
-  var finalRules = [];
-  var self = this;
-  
-  this.get('layoutProperties').forEach(function(layoutProperty){
-      self.get('sizeNames').forEach(function(sizeName){
-          finalRules.push(layoutProperty + '-' + sizeName);
-      });
-  
-      finalRules.push('hide');
-      finalRules.push('show');
-  });
-  
-  
-  attributeBindings: finalRules
+  finalRules Ember.computed(function(){
+    var ret = [];
+    var self = this;
+
+    this.get('layoutProperties').forEach(function(layoutProperty){
+        self.get('sizeNames').forEach(function(sizeName){
+            ret.push(layoutProperty + '-' + sizeName);
+        });
+    
+        ret.push('hide');
+        ret.push('show');
+    });
+    
+    ret.push.apply(ret, self.get("layoutSingleRules"));
+    
+    return ret;
+  }),
+
+    attributeBindings: finalRules
 
 });
 
