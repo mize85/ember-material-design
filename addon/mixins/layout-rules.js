@@ -46,7 +46,7 @@ var LayoutRulesMixin = Ember.Mixin.create({
         ret.push('show');
     });
     
-    ret.push.apply(ret, layoutSingleRules));
+    ret.push.apply(ret, layoutSingleRules);
     
     return ret;
   }),
