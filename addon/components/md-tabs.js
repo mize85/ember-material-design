@@ -229,9 +229,12 @@ var MdTabs = Ember.Component.extend(Ember.Evented, LayoutRules, RippleMixin, {
             return false;
         }
         var canvasWidth = this.$().prop('clientWidth');
-        this.elements.tabs.forEach(function(tab){
+        
+        if(this.elements.tabs){
+          this.elements.tabs.forEach(function(tab){
             canvasWidth -= tab.offsetWidth;
-        });
+          });
+        }
 
         var shouldPaginate = canvasWidth < 0;
 
