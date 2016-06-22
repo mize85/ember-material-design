@@ -66,7 +66,9 @@ export default Ember.Component.extend({
     var startZIndex = variablesElement.style.zIndex;
 
     // Always reset the items to their natural position/state
-    Ember.EnumerableUtils.forEach(items, (item, index) => {
+    let itemsArr = Array.prototype.slice.call(items);
+
+    itemsArr.forEach((item, index) => {
       var styles = item.style;
 
       styles.transform = styles.webkitTransform = '';
@@ -79,7 +81,10 @@ export default Ember.Component.extend({
 
     // If the control is closed, hide the items behind the trigger
     if (!this.get('md-open')) {
-      Ember.EnumerableUtils.forEach(items, (item, index) => {
+
+      let itemsArr = Array.prototype.slice.call(items);
+
+      itemsArr.forEach((item, index) => {
         var newPosition, axis;
         var styles = item.style;
 
@@ -119,7 +124,9 @@ export default Ember.Component.extend({
     var items = el.querySelectorAll('.md-fab-action-item');
 
     // Always reset the items to their natural position/state
-    Ember.EnumerableUtils.forEach(items, (item, index) => {
+    let itemsArr = Array.prototype.slice.call(items);
+
+    itemsArr.forEach((item, index) => {
       var styles = item.style,
         offsetDelay = index * delay;
 

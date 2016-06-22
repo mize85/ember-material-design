@@ -80,7 +80,7 @@ export default Ember.Component.extend({
         iconElement.style.transitionDelay = '.3s';
 
         // Apply a transition delay to actions
-        Ember.EnumerableUtils.forEach(actions, (action, index) => {
+        actions.toArray().forEach((action, index) => {
           action.style.transitionDelay = `${(actions.length - index) * 25}ms`;
         });
 
@@ -107,7 +107,7 @@ export default Ember.Component.extend({
         iconElement.style.transitionDelay = '0ms';
 
         // Apply a transition delay to actions
-        Ember.EnumerableUtils.forEach(actions, (action, index) => {
+        actions.toArray().forEach((action, index) => {
           action.style.transitionDelay = `${(index * 25)}ms`;
         });
       }

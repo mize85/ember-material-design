@@ -629,3 +629,11 @@ ul.methods > li:first-child > *:first-child {
 demo-source-tabs md-tabs-content-wrapper {
   height: 400px;
 }
+
+body{
+  > .ember-view{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+}

@@ -23,7 +23,7 @@ module.exports = function(environment) {
         },
 
         contentSecurityPolicy: {
-            'default-src': "'none'",
+            'default-src': "'none' http://www.youtube.com",
             'script-src': "'self' 'unsafe-eval' https://www.google-analytics.com",
             'font-src': "'self' https://fonts.gstatic.com",
             'style-src': "'self' https://fonts.googleapis.com 'unsafe-inline'",
