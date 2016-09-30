@@ -1,10 +1,10 @@
 import Ember from 'ember';
+import RipplesMixin from '../mixins/ripples';
 import LayoutRules from '../mixins/layout-rules';
 
-var MdButtonComponent = Ember.Component.extend(LayoutRules, {
+var MdButtonComponent = Ember.Component.extend(LayoutRules, RipplesMixin, {
 
     tagName: 'button',
-    rippleService: Ember.inject.service('ripple'),
 
     classNames: ['md-button'],
 
