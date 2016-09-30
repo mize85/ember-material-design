@@ -44,7 +44,7 @@ var MdMenuComponent = Ember.Component.extend({
     this.setupMenuContents();
   },
 
-  willRemoveElement() {
+  willDestroyElement() {
     this.closeMenu();
     this._super(...arguments);
   },
