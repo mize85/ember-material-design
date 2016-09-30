@@ -26,8 +26,12 @@ var MdTooltip = Ember.Component.extend(LayoutRules, {
     },
 
     rootElement: Ember.computed(function() {
-        var re = Ember.getOwner(this).lookup('application:main').get('rootElement');
-        return Ember.$(re);
+      let rootElem = Ember.getOwner(this).lookup('application:main').get('rootElement');
+
+      if(!rootElem){
+        rootElem = Ember.getOwner(this).resolveRegistration('config:environment').APP.rootElement;
+      }
+      return Ember.$(rootElem);
     }),
 
     bindEvents() {

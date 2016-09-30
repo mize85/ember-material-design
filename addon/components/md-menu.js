@@ -51,7 +51,14 @@ var MdMenuComponent = Ember.Component.extend({
 
   setupMenuContents() {
     this.backdrop = Ember.$('<md-backdrop class="md-menu-backdrop md-click-catcher">');
-    this.rootElement = Ember.$(Ember.getOwner(this).lookup('application:main').get('rootElement'));
+    
+    let rootElem = Ember.getOwner(this).lookup('application:main').get('rootElement');
+      
+    if(!rootElem){
+      rootElem = Ember.getOwner(this).resolveRegistration('config:environment').APP.rootElement;
+    }
+    
+    this.rootElement = Ember.$(rootElem);
     this.parent = findParent(this.rootElement);
 
     // move the menu content to a the menu container
