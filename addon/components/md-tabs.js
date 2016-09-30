@@ -115,25 +115,6 @@ var MdTabs = Ember.Component.extend(Ember.Evented, LayoutRules, RippleMixin, {
         this.elements = elements;
     },
 
-    keyDown(event) {
-        switch (event.keyCode) {
-            case this.get('constants.KEYCODE.LEFT_ARROW'):
-                event.preventDefault();
-                this.incrementSelectedIndex(-1, true);
-                break;
-            case this.get('constants.KEYCODE.RIGHT_ARROW'):
-                event.preventDefault();
-                this.incrementSelectedIndex(1, true);
-                break;
-            case this.get('constants.KEYCODE.SPACE'):
-            case this.get('constants.KEYCODE.ENTER'):
-                event.preventDefault();
-                this.set('selectedIndex', this.get('focusIndex'));
-                break;
-        }
-        this.set('lastClick', false);
-    },
-
     incrementSelectedIndex(inc, focus) {
         var newIndex,
             index = focus ? this.get('focusIndex') : this.get('selectedIndex');
