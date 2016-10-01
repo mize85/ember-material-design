@@ -55,7 +55,7 @@ var MdMenuComponent = Ember.Component.extend({
     let rootElem = Ember.getOwner(this).lookup('application:main').get('rootElement');
       
     if(!rootElem){
-      rootElem = Ember.getOwner(this).resolveRegistration('config:environment').APP.rootElement;
+      rootElem = "#ember-testing";
     }
     
     this.rootElement = Ember.$(rootElem);

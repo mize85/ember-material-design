@@ -59,7 +59,7 @@ var MdToast = Ember.Component.extend(LayoutRules, {
     let rootElem = Ember.getOwner(this).lookup('application:main').get('rootElement');
 
     if(!rootElem){
-      rootElem = Ember.getOwner(this).resolveRegistration('config:environment').APP.rootElement;
+      rootElem = "#ember-testing";
     }
     return Ember.$(rootElem);
   }),
