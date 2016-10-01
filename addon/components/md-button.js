@@ -12,7 +12,9 @@ var MdButtonComponent = Ember.Component.extend(LayoutRules, RipplesMixin, {
 
     didInsertElement() {
         this._super(...arguments);
-        this.get('rippleService').setupButton(this, this.$());
+
+        const rs = this.get('rippleService');
+        if(rs) rs.setupButton(this, this.$());
 
         //if (this.get('action')) {
         //  this.$().attr('md-has-action', true);
