@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const {get} = Ember;
+
 let HasLayoutMixin = Ember.Mixin.create({
 
 
