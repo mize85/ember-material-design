@@ -1,6 +1,7 @@
 import Ember from 'ember';
+const {get} = Ember;
 
-var HasFlexMixin = Ember.Mixin.create({
+let HasFlexMixin = Ember.Mixin.create({
   init() {
     this._super(...arguments);
 
