@@ -13,12 +13,8 @@ let HasLayoutMixin = Ember.Mixin.create({
     } = this;
 
     if(tagName && tagName.length){
-      let newAttributeBindings = [];
       const bindings = get(this, 'attributeBindings');
-
-      newAttributeBindings = newAttributeBindings.concat(['layoutType:layout', 'layout-align']);
-      newAttributeBindings = newAttributeBindings.concat(bindings);
-
+      const newAttributeBindings = [].concat(bindings, ['layoutType:layout', 'layout-align']);
       this.set('attributeBindings', newAttributeBindings);
     }
   },
