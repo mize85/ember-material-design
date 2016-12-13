@@ -16,8 +16,8 @@ let HasLayoutMixin = Ember.Mixin.create({
       let newAttributeBindings = [];
       const bindings = get(this, 'attributeBindings');
 
-      newAttributeBindings.concat(['layoutType:layout', 'layout-align']);
-      newAttributeBindings.concat(bindings);
+      newAttributeBindings = newAttributeBindings.concat(['layoutType:layout', 'layout-align']);
+      newAttributeBindings = newAttributeBindings.concat(bindings);
 
       this.set('attributeBindings', newAttributeBindings);
     }
