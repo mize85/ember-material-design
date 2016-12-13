@@ -10,8 +10,12 @@ let HasFlexMixin = Ember.Mixin.create({
     } = this;
 
     if(tagName && tagName.length){
+
+      let newAttributeBindings = ['flex'];
       const bindings = get(this, 'attributeBindings');
-      let newAttributeBindings = [].concat(['flex'], bindings);
+      if(bindings){
+        newAttributeBindings= newAttributeBindings.concat(bindings);
+      }
       this.set('attributeBindings', newAttributeBindings);
     }
   },
