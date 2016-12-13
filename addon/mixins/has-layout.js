@@ -1,8 +1,25 @@
 import Ember from 'ember';
 
-var HasLayoutMixin = Ember.Mixin.create({
-  attributeBindings: ['layoutType:layout', 'layout-align'],
+let HasLayoutMixin = Ember.Mixin.create({
 
+
+  init() {
+    this._super(...arguments);
+
+    const {
+      tagName,
+    } = this;
+
+    if(tagName && tagName.length){
+      let newAttributeBindings = [];
+      const bindings = get(this, 'attributeBindings');
+
+      newAttributeBindings.concat(['layoutType:layout', 'layout-align']);
+      newAttributeBindings.concat(bindings);
+
+      this.set('attributeBindings', newAttributeBindings);
+    }
+  },
   layoutType: null
 
 });
