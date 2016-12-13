@@ -2,9 +2,11 @@ import Ember from 'ember';
 import config from './config/environment';
 import googlePageView from './mixins/google-page-view';
 
-var Router = Ember.Router.extend(googlePageView, {
-    location: config.locationType
+const Router = Ember.Router.extend(googlePageView, {
+  location: config.locationType,
+  rootURL: config.rootURL
 });
+
 
 export default Router.map(function() {
   this.route('buttons');
