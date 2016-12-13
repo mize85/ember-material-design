@@ -3,7 +3,7 @@ const {get} = Ember;
 
 let HasFlexMixin = Ember.Mixin.create({
   init() {
-    this._super(...arguments);
+    this._super();
 
     const {
       tagName,
@@ -11,7 +11,7 @@ let HasFlexMixin = Ember.Mixin.create({
 
     if(tagName && tagName.length){
       const bindings = get(this, 'attributeBindings');
-      const newAttributeBindings = [].concat(['flex'], bindings);
+      let newAttributeBindings = [].concat(['flex'], bindings);
       this.set('attributeBindings', newAttributeBindings);
     }
   },
