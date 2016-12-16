@@ -1,12 +1,11 @@
-import Ember from 'ember';
+import Ember from "ember";
 
-var StyleSafeMixin = Ember.Mixin.create({
+const StyleSafeMixin = Ember.Mixin.create({
   attributeBindings: ['styleSafe:style'],
 
-  styleSafe: Ember.computed('style', function() {
-    var style = this.get('style') || '';
-
-      return new Ember.Handlebars.SafeString(style);
+  styleSafe: Ember.computed('style', function () {
+    const style = this.get('style') || '';
+    return new Ember.String.htmlSafe(style);
   })
 
 });
