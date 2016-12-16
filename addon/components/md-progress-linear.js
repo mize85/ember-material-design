@@ -39,16 +39,16 @@ var MdProgressLinear = Ember.Component.extend(LayoutRules, {
     },
 
     bar1Style: Ember.computed('clampedBufferValue', function() {
-        return new Ember.Handlebars.SafeString(this.get('constants.CSS.TRANSFORM') + ': ' + this.transforms[this.get('clampedBufferValue')]);
+        return new Ember.String.htmlSafe(this.get('constants.CSS.TRANSFORM') + ': ' + this.transforms[this.get('clampedBufferValue')]);
     }),
 
     bar2Style: Ember.computed('clampedValue', function() {
 
         if (this.get('md-mode') === 'query') {
-            return new Ember.Handlebars.SafeString('');
+            return new Ember.String.htmlSafe('');
         }
 
-        return new Ember.Handlebars.SafeString(this.get('constants.CSS.TRANSFORM') + ': ' + this.transforms[this.get('clampedValue')]);
+        return new Ember.String.htmlSafe(this.get('constants.CSS.TRANSFORM') + ': ' + this.transforms[this.get('clampedValue')]);
     }),
 
     clampedValue: Ember.computed('value', function() {

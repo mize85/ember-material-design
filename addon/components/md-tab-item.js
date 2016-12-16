@@ -25,10 +25,10 @@ var MdTabItem = Ember.Component.extend(LayoutRules, {
       var tabWidth = this.get('tabWidth');
 
       if (tabWidth) {
-        return new Ember.Handlebars.SafeString(`max-width: ${tabWidth}px;`);
+        return new Ember.String.htmlSafe(`max-width: ${tabWidth}px;`);
       }
 
-      return new Ember.Handlebars.SafeString('max-width: none;');
+      return new Ember.String.htmlSafe('max-width: none;');
     }),
 
     isActive: Ember.computed('tabsComponent.selectedIndex', function() {
