@@ -16,6 +16,12 @@ module.exports = function(defaults) {
       sourceMap: true,
       enabled: true
     },
+
+    sassOptions: {
+      sourceMapEmbed: true,
+      outputFile: 'dummy.css'
+    },
+
     outputPaths: {
       app: {
         css: {
