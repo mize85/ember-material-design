@@ -105,7 +105,7 @@ var MdMenuComponent = Ember.Component.extend({
   },
 
   closeMenu() {
-    this.set('isRemoved', true);
+
 
     if(this.menuContainer){
       this.menuContainer.removeClass('md-active')
@@ -122,6 +122,7 @@ var MdMenuComponent = Ember.Component.extend({
           this.backdrop.remove();
         }
 
+        this.set('isRemoved', true);
         Ember.$(window).off('.md-menu');
 
       }, 350);
