@@ -6,6 +6,10 @@ $progress-circular-sporadic-duration: $progress-circular-duration !default;
 $progress-circular-size: 50px !default;
 
 @keyframes outer-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  
   100% {
     transform: rotate(360deg);
   }
