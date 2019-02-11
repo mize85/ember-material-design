@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 
-var ToastModel = Ember.Object.extend({
+var ToastModel = EmberObject.extend({
   position: 'bottom left',
   hideDelay: 3000,
   capsule: false,

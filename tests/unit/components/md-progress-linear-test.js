@@ -3,8 +3,6 @@ import {
     test
     } from 'ember-qunit';
 
-import Ember from 'ember';
-
 moduleForComponent('md-progress-linear', {
     // Specify the other units that are required for this test
     needs: ['service:constants', 'service:sniffer']

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { later } from '@ember/runloop';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 export default BaseDemoController.extend({
@@ -16,7 +16,7 @@ export default BaseDemoController.extend({
     determinateValue2: 30,
 
     setupTimer: function() {
-        Ember.run.later(this, function() {
+        later(this, function() {
             this.incrementProperty('determinateValue', 1);
             this.incrementProperty('determinateValue2', 1.5);
             if (this.get('determinateValue') > 100) {
@@ -24,15 +24,15 @@ export default BaseDemoController.extend({
                 this.set('determinateValue2', 30);
             }
 
-            Ember.run.later(this, this.setupTimer);
+            later(this, this.setupTimer);
 
         }, 100);
     },
 
     setupTimer2: function() {
-        Ember.run.later(this, function() {
+        later(this, function() {
             this.set('mode', this.get('mode') == 'query' ? 'determinate' : 'query');
-            Ember.run.later(this, this.setupTimer2);
+            later(this, this.setupTimer2);
         }, 7200);
     }
 });

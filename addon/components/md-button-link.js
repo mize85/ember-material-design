@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import LayoutRules from '../mixins/layout-rules';
 
 
-var MdButtonLink = Ember.Component.extend(LayoutRules, {
-    tagName: 'a',
+var MdButtonLink = Component.extend(LayoutRules, {
+  tagName: 'a',
 
-    classNames: ['md-button']
+  classNames: ['md-button']
 });
 
 export default MdButtonLink;

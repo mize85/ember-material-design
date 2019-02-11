@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import ArrayProxy from '@ember/array/proxy';
+import { on } from '@ember/object/evented';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 export default BaseDemoController.extend({
@@ -14,9 +16,9 @@ export default BaseDemoController.extend({
 
   showSourcePositionModes: false,
 
-  setSourcePositionModes: Ember.on('init', function() {
-    var sourceFiles = Ember.ArrayProxy.create({
-      content: Ember.A([
+  setSourcePositionModes: on('init', function() {
+    var sourceFiles = ArrayProxy.create({
+      content: A([
         {name: 'hbs', content: 'menu-position-modes.hbs'},
         {name: 'controller', content: 'menu-controller.js'}
       ])

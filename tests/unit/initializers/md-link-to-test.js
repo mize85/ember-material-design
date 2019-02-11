@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import Application from '@ember/application';
+import { run } from '@ember/runloop';
 import { initialize } from '../../../initializers/md-link-to';
 import { module, test } from 'qunit';
 
@@ -6,8 +7,8 @@ var container, application;
 
 module('MdLinkToInitializer', {
   beforeEach: function() {
-    Ember.run(function() {
-      application = Ember.Application.create();
+    run(function() {
+      application = Application.create();
       container = application.__container__;
       application.deferReadiness();
     });

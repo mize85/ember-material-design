@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'md-fab-actions',
 
   didInsertElement() {
@@ -9,7 +9,6 @@ export default Ember.Component.extend({
   },
 
   setupComponent() {
-
 
 
     this.$().children().wrap('<div class="md-fab-action-item">');

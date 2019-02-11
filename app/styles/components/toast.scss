@@ -40,11 +40,13 @@ md-toast {
 
   &.ng-enter {
     transform: translate3d(0, 100%, 0);
+
     &.md-top {
       transform: translate3d(0, -100%, 0);
     }
 
     opacity: 0;
+
     &.ng-enter-active {
       transform: translate3d(0, 0, 0);
       opacity: 1;
@@ -54,12 +56,15 @@ md-toast {
   &.ng-leave.ng-leave-active {
     opacity: 0;
     transform: translate3d(0, 100%, 0);
+
     &.md-top {
       transform: translate3d(0, -100%, 0);
     }
+
     &.md-swipeleft {
       transform: translate3d(-100%, 0%, 0);
     }
+
     &.md-swiperight {
       transform: translate3d(100%, 0%, 0);
     }
@@ -87,6 +92,7 @@ md-toast {
     min-width: 0;
     border-radius: 0;
     bottom: 0;
+
     &.md-top {
       bottom: auto;
       top: 0;
@@ -97,15 +103,19 @@ md-toast {
 @media (min-width: $layout-breakpoint-sm) {
   md-toast {
     min-width: 288px;
+
     &.md-bottom {
       bottom: $toast-margin;
     }
+
     &.md-left {
       left: $toast-margin;
     }
+
     &.md-right {
       right: $toast-margin;
     }
+
     &.md-top {
       top: $toast-margin;
     }
@@ -118,13 +128,16 @@ md-toast {
       &.md-swipeleft {
         transform: translate3d(-100%, 25%, 0) rotateZ(-15deg);
       }
+
       &.md-swiperight {
         transform: translate3d(100%, 25%, 0) rotateZ(15deg);
       }
+
       &.md-top {
         &.md-swipeleft {
           transform: translate3d(-100%, 0, 0) rotateZ(-15deg);
         }
+
         &.md-swiperight {
           transform: translate3d(100%, 0, 0) rotateZ(15deg);
         }

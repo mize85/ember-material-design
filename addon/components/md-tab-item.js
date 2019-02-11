@@ -1,47 +1,50 @@
-import Ember from 'ember';
+import {htmlSafe} from '@ember/string';
+import {computed} from '@ember/object';
+import {alias} from '@ember/object/computed';
+import Component from '@ember/component';
 import LayoutRules from '../mixins/layout-rules';
 
-var MdTabItem = Ember.Component.extend(LayoutRules, {
-    tagName: 'md-tab-item',
+var MdTabItem = Component.extend(LayoutRules, {
+  tagName: 'md-tab-item',
 
-    attributeBindings: ['tab', 'role', 'label', 'tabWidthStyle:style'],
-    classNameBindings: ['isActive:md-active', 'isFocused:md-focus', 'isDisabled:md-disabled'],
+  attributeBindings: ['tab', 'role', 'label', 'tabWidthStyle:style'],
+  classNameBindings: ['isActive:md-active', 'isFocused:md-focus', 'isDisabled:md-disabled'],
 
-    tabWrapperComponent: Ember.computed.alias('parentView'),
-    tabsComponent: Ember.computed.alias('tabWrapperComponent.parentView'),
+  tabWrapperComponent: alias('parentView'),
+  tabsComponent: alias('tabWrapperComponent.parentView'),
 
-    tabWidth: null,
+  tabWidth: null,
 
-    didInsertElement() {
-        this._super(...arguments);
-        this.get('tabsComponent').attachRipple(this.$());
-    },
+  didInsertElement() {
+    this._super(...arguments);
+    this.get('tabsComponent').attachRipple(this.$());
+  },
 
-    click() {
-        this.get('tabsComponent').select(this.get('tab').getIndex());
-    },
+  click() {
+    this.get('tabsComponent').select(this.get('tab').getIndex());
+  },
 
-    tabWidthStyle: Ember.computed('tabWidth', function() {
-      var tabWidth = this.get('tabWidth');
+  tabWidthStyle: computed('tabWidth', function () {
+    var tabWidth = this.get('tabWidth');
 
-      if (tabWidth) {
-        return new Ember.String.htmlSafe(`max-width: ${tabWidth}px;`);
-      }
+    if (tabWidth) {
+      return new htmlSafe(`max-width: ${tabWidth}px;`);
+    }
 
-      return new Ember.String.htmlSafe('max-width: none;');
-    }),
+    return new htmlSafe('max-width: none;');
+  }),
 
-    isActive: Ember.computed('tabsComponent.selectedIndex', function() {
-        return this.get('tab').isActive();
-    }),
+  isActive: computed('tabsComponent.selectedIndex', function () {
+    return this.get('tab').isActive();
+  }),
 
-    isFocused: Ember.computed('tabsComponent.selectedIndex', function() {
-        return this.get('tab').hasFocus();
-    }),
+  isFocused: computed('tabsComponent.selectedIndex', function () {
+    return this.get('tab').hasFocus();
+  }),
 
-    isDisabled: Ember.computed('tab.disabled', function() {
-        return this.get('tab.disabled');
-    })
+  isDisabled: computed('tab.disabled', function () {
+    return this.get('tab.disabled');
+  })
 
 });
 

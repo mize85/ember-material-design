@@ -32,9 +32,11 @@ md-input-container {
       .md-input {
         border-color: color($primary);
       }
+
       label {
         color: color($primary);
       }
+
       md-icon {
         color: color($primary);
       }
@@ -43,6 +45,7 @@ md-input-container {
         .md-input {
           border-color: color($accent);
         }
+
         label {
           color: color($accent);
         }
@@ -52,6 +55,7 @@ md-input-container {
         .md-input {
           border-color: color($warn);
         }
+
         label {
           color: color($warn);
         }
@@ -63,9 +67,11 @@ md-input-container {
     .md-input {
       border-color: color($warn);
     }
+
     &.md-input-focused label {
       color: color($warn, '500');
     }
+
     md-input-message, .md-char-counter {
       color: color($warn, '500');
     }

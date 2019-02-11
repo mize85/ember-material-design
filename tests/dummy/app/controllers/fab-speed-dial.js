@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 export default BaseDemoController.extend({
@@ -18,10 +18,10 @@ export default BaseDemoController.extend({
 
     isOpen: false,
 
-    availableModes: Ember.A(['md-fling', 'md-scale']),
+    availableModes: A(['md-fling', 'md-scale']),
     selectedMode: 'md-fling',
 
-    availableDirections: Ember.A(['up', 'down', 'left', 'right']),
+    availableDirections: A(['up', 'down', 'left', 'right']),
     selectedDirection: 'up'
   }
 });

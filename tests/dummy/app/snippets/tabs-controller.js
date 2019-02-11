@@ -1,9 +1,12 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
+import ArrayProxy from '@ember/array/proxy';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
-    tabs: Ember.ArrayProxy.create({
-        content: Ember.A([
+    tabs: ArrayProxy.create({
+        content: A([
             { title: 'One', content: "Tabs will become paginated if there isn't enough room for them."},
             { title: 'Two', content: "You can swipe left and right on a mobile device to change tabs."},
             { title: 'Three', content: "You can bind the selected tab via the selected attribute on the md-tabs element."},
@@ -17,14 +20,14 @@ export default Ember.Controller.extend({
         ])
     }),
 
-    cantRemoveTabs: Ember.computed('tabs.length', function() {
+    cantRemoveTabs: computed('tabs.length', function() {
 
         return this.get('tabs.length') <= 1;
     }),
 
     selectedIndex: 2,
 
-    selectedTab: Ember.computed('selectedIndex', 'tabs.[]', function() {
+    selectedTab: computed('selectedIndex', 'tabs.[]', function() {
         return this.get('tabs').objectAt(this.get('selectedIndex'));
     }),
 

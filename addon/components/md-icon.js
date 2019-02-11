@@ -1,51 +1,54 @@
-import Ember from 'ember';
+import {computed, observer} from '@ember/object';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 import LayoutRules from '../mixins/layout-rules';
 import StyleSafe from '../mixins/style-safe';
 
-var MdIcon = Ember.Component.extend(LayoutRules, StyleSafe, {
-    iconService: Ember.inject.service('icon'),
+var MdIcon = Component.extend(LayoutRules, StyleSafe, {
+  iconService: service('icon'),
 
-    tagName: 'md-icon',
+  tagName: 'md-icon',
 
-    attributeBindings: ['md-menu-origin', 'md-menu-align-target'],
+  attributeBindings: ['md-menu-origin', 'md-menu-align-target'],
 
-    didInsertElement() {
-        this._super(...arguments);
-        this.setupIcon();
-    },
+  didInsertElement() {
+    this._super(...arguments);
+    this.setupIcon();
+  },
 
-    iconName: Ember.computed('md-svg-icon', 'md-svg-src', function() {
-        return this.get('md-svg-icon') || this.get('md-svg-src') || '';
-    }),
+  iconName: computed('md-svg-icon', 'md-svg-src', function () {
+    return this.get('md-svg-icon') || this.get('md-svg-src') || '';
+  }),
 
-    classNameBindings: ['iconClass'],
+  classNameBindings: ['iconClass'],
 
-    fontIcon: Ember.computed('mdFontIcon', function() {
-        return 'md-font ' + this.get('mdFontIcon');
-    }),
+  fontIcon: computed('mdFontIcon', function () {
+    return 'md-font ' + this.get('mdFontIcon');
+  }),
 
-    loadIcon: Ember.observer('iconName', function() {
+  loadIcon: observer('iconName', function () {
 
-        var iconName = this.get('iconName'),
-            element = this.$();
+    var iconName = this.get('iconName'),
+      element = this.$();
 
-        
-        if (iconName) {
-            var is = this.get('iconService');
-            is.getIcon(iconName)
-                .then(function(icon) {
-                    element.html(icon.svg);;
-                });
-        }else{
-          element.empty();
-        }
-    }),
 
-    setupIcon() {
-        if (!this.get('mdFontIcon')) {
-            this.loadIcon();
-        }
+    if (iconName) {
+      var is = this.get('iconService');
+      is.getIcon(iconName)
+        .then(function (icon) {
+          element.html(icon.svg);
+          ;
+        });
+    } else {
+      element.empty();
     }
+  }),
+
+  setupIcon() {
+    if (!this.get('mdFontIcon')) {
+      this.loadIcon();
+    }
+  }
 
 });
 

@@ -26,6 +26,7 @@
     opacity: 1;
     transition: opacity 200ms $swift-ease-out-timing-function;
     transition-duration: 200ms;
+
     > md-menu-content > * {
       opacity: 1;
       transition: $swift-ease-in;
@@ -79,6 +80,7 @@ md-menu-item {
     align-items: baseline;
     align-content: left;
     width: 100%;
+
     md-icon {
       margin: auto 2*$baseline-grid auto 0;
     }
@@ -87,6 +89,7 @@ md-menu-item {
       display: inline-block;
       margin: auto;
     }
+
     span {
       margin-top: auto;
       margin-bottom: auto;

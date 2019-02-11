@@ -10,9 +10,11 @@ md-radio-button {
   &.md-checked .md-off {
     border-color: rgba(color($accent), 0.87);
   }
+
   &.md-checked .md-ink-ripple {
     color: rgba(color($accent), 0.87);
   }
+
   .md-container .md-ripple {
     color: color($accent, '600');
   }
@@ -27,12 +29,14 @@ md-radio-button {
       .md-on {
         background-color: rgba(color($primary), 0.87);
       }
+
       .md-checked,
       &.md-checked {
         .md-off {
           border-color: rgba(color($primary), 0.87);
         }
       }
+
       .md-checked,
       &.md-checked {
         .md-ink-ripple {
@@ -40,6 +44,7 @@ md-radio-button {
         }
 
       }
+
       .md-container .md-ripple {
         color: color($primary, '600');
       }
@@ -50,6 +55,7 @@ md-radio-button {
       .md-on {
         background-color: rgba(color($warn), 0.87);
       }
+
       .md-checked,
       &.md-checked {
         .md-off {
@@ -57,6 +63,7 @@ md-radio-button {
         }
 
       }
+
       .md-checked,
       &.md-checked {
         .md-ink-ripple {
@@ -64,6 +71,7 @@ md-radio-button {
         }
 
       }
+
       .md-container .md-ripple {
         color: color($warn, '600');
       }
@@ -74,6 +82,7 @@ md-radio-button {
     .md-container .md-off {
       border-color: color($foreground, '3');
     }
+
     .md-container .md-on {
       border-color: color($foreground, '3');
     }

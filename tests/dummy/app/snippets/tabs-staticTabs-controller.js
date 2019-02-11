@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
     data: {
         selectedIndex: 0,
         secondLocked: true,
@@ -8,7 +9,7 @@ export default Ember.Controller.extend({
         bottom: false
     },
 
-    alignTabs: Ember.computed('data.bottom', function() {
+    alignTabs: computed('data.bottom', function() {
         return this.get('data.bottom') ? 'bottom' : 'top';
     })
 });

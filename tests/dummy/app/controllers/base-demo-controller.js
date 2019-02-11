@@ -1,11 +1,15 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import ArrayProxy from '@ember/array/proxy';
+import { htmlSafe } from '@ember/string';
+import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 
-var BaseDemoController = Ember.Controller.extend({
+var BaseDemoController = Controller.extend({
     showSource: false,
 
-    showSourceClass: Ember.computed('showSource', function() {
+    showSourceClass: computed('showSource', function() {
         var showSourceClass = this.get('showSource') ? 'show-source' : '';
-        return Ember.String.htmlSafe(showSourceClass);
+        return htmlSafe(showSourceClass);
         //return showSourceClass.htmlSafe();
     }),
 
@@ -17,8 +21,8 @@ var BaseDemoController = Ember.Controller.extend({
         this._super();
         var demoName = this.get('demoName');
 
-        var sourceFiles = Ember.ArrayProxy.create({
-            content: Ember.A([
+        var sourceFiles = ArrayProxy.create({
+            content: A([
                 {name: 'hbs', content: demoName + '-index.hbs'},
                 {name: 'controller', content: demoName + '-controller.js'},
                 {name: 'route', content: demoName + '-route.js'},
@@ -26,8 +30,8 @@ var BaseDemoController = Ember.Controller.extend({
             ])
         });
 
-        var sf = Ember.ArrayProxy.create({
-            content: Ember.A(demoContent)
+        var sf = ArrayProxy.create({
+            content: A(demoContent)
         });
 
         this.set('sourceFiles', sf);

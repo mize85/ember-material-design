@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'md-fab-trigger',
 
   didInsertElement() {
@@ -12,13 +13,13 @@ export default Ember.Component.extend({
 
     let children = this.$().children();
 
-    if(children){
+    if (children) {
       children.toArray().forEach((child) => {
-        Ember.$(child).on('focus', () => {
+        $(child).on('focus', () => {
           this.set('parentView.md-open', true);
         });
 
-        Ember.$(child).on('blur', () => {
+        $(child).on('blur', () => {
           this.set('parentView.md-open', false);
         });
       });

@@ -1,19 +1,21 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import {alias} from '@ember/object/computed';
+import Component from '@ember/component';
 import LayoutRules from '../mixins/layout-rules';
 
-var MdTabWrapper = Ember.Component.extend(LayoutRules, {
+var MdTabWrapper = Component.extend(LayoutRules, {
   tagName: 'md-tabs-wrapper',
   classNameBindings: ['shouldStretchTabs:md-stretch-tabs'],
 
-  tabsComponent: Ember.computed.alias('parentView'),
+  tabsComponent: alias('parentView'),
 
-  tabs: Ember.computed.alias('tabsComponent.tabs'),
+  tabs: alias('tabsComponent.tabs'),
 
-  shouldStretchTabs: Ember.computed('tabsComponent.shouldStretchTabs', function() {
+  shouldStretchTabs: computed('tabsComponent.shouldStretchTabs', function () {
     return this.get('tabsComponent.shouldStretchTabs');
   }),
 
-  shouldPaginate: Ember.computed('tabsComponent.shouldPaginate', function() {
+  shouldPaginate: computed('tabsComponent.shouldPaginate', function () {
     return this.get('tabsComponent.shouldPaginate');
   }),
 

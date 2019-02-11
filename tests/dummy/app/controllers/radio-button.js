@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import ArrayProxy from '@ember/array/proxy';
+import { A } from '@ember/array';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 export default BaseDemoController.extend({
@@ -17,7 +18,7 @@ export default BaseDemoController.extend({
         group3: 'avatar-1'
     },
 
-    avatarData: Ember.A([{
+    avatarData: A([{
         id: 'avatars:svg-1',
         title: 'avatar 1',
         value: 'avatar-1'
@@ -31,8 +32,8 @@ export default BaseDemoController.extend({
         value: 'avatar-3'
     }]),
 
-    radioData: Ember.ArrayProxy.create({
-        content: Ember.A([
+    radioData: ArrayProxy.create({
+        content: A([
             {label: '1', value: 1},
             {label: '2', value: 2},
             {label: '3', value: '3', isDisabled: true},

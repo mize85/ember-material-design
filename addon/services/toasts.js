@@ -1,11 +1,14 @@
-import Ember from 'ember';
+import {computed, observer} from '@ember/object';
+import {later} from '@ember/runloop';
+import {A} from '@ember/array';
+import Service from '@ember/service';
 import Toast from '../models/toast';
 
-var ToastService = Ember.Service.extend({
+var ToastService = Service.extend({
 
-  toasts: Ember.A([]),
+  toasts: A([]),
 
-  showToast: function(toast) {
+  showToast: function (toast) {
 
     // check to see if there are existing toast and destroy them
     var existingToasts = this.get('toasts').filterBy('open');
@@ -19,7 +22,7 @@ var ToastService = Ember.Service.extend({
 
     var delay = existingToasts.length > 0 ? 400 : 0;
 
-    Ember.run.later(this, () => {
+    later(this, () => {
       this.get('toasts').pushObject(newToast);
       return newToast;
     }, delay);
@@ -27,15 +30,15 @@ var ToastService = Ember.Service.extend({
 
   },
 
-  activeToasts: Ember.computed('toasts.@each.open', function() {
-    return Ember.A(this.get('toasts').filterBy('open', true));
+  activeToasts: computed('toasts.@each.open', function () {
+    return A(this.get('toasts').filterBy('open', true));
   }),
 
-  removeToast: function(toast) {
+  removeToast: function (toast) {
     toast.set('destroying', true);
   },
 
-  destroyToasts: Ember.observer('toasts.@each.destroyed', function() {
+  destroyToasts: observer('toasts.@each.destroyed', function () {
     var destroyedToasts = this.get('toasts').filterBy('destroyed');
     destroyedToasts.forEach((dt) => {
       this.get('toasts').removeObject(dt);

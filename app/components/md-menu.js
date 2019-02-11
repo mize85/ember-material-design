@@ -1,1 +1,1 @@
-export { default } from 'ember-material-design/components/md-menu';
+export {default} from 'ember-material-design/components/md-menu';

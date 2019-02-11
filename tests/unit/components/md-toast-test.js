@@ -1,9 +1,9 @@
+import $ from 'jquery';
+
 import {
   moduleForComponent,
   test
 } from 'ember-qunit';
-
-import Ember from 'ember';
 import config from '../../../config/environment';
 
 moduleForComponent('md-toast', {
@@ -12,7 +12,7 @@ moduleForComponent('md-toast', {
   unit: true
 });
 
-var rootElement = Ember.$(config.APP.rootElement);
+var rootElement = $(config.APP.rootElement);
 
 test('it renders', function(assert) {
   assert.expect(2);

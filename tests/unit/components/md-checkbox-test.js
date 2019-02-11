@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import { run } from '@ember/runloop';
 import {
   moduleForComponent,
   test
@@ -25,7 +27,7 @@ test('it should have md-checked class when checked', function(assert) {
 
   var component = this.subject();
 
-  Ember.run(() => {
+  run(() => {
     component.set('checked', true);
   });
 
@@ -37,10 +39,10 @@ test('it should be able to be checked using space bar', function(assert) {
   assert.expect(2);
   var component = this.subject();
 
-  var e = Ember.$.Event('keypress');
+  var e = $.Event('keypress');
   e.which = 32;
 
-  Ember.run(() => {
+  run(() => {
     this.$().trigger(e);
   });
 
@@ -55,10 +57,10 @@ test('it should be able to be unchecked using space bar', function(assert) {
     checked: true
   });
 
-  var e = Ember.$.Event('keypress');
+  var e = $.Event('keypress');
   e.which = 32;
 
-  Ember.run(() => {
+  run(() => {
     this.$().trigger(e);
   });
 
@@ -71,10 +73,10 @@ test('it should be able to be checked using enter key', function(assert) {
   assert.expect(2);
   var component = this.subject();
 
-  var e = Ember.$.Event('keypress');
+  var e = $.Event('keypress');
   e.which = 13;
 
-  Ember.run(() => {
+  run(() => {
     this.$().trigger(e);
   });
 
@@ -89,10 +91,10 @@ test('it should be able to be unchecked using enter key', function(assert) {
     checked: true
   });
 
-  var e = Ember.$.Event('keypress');
+  var e = $.Event('keypress');
   e.which = 13;
 
-  Ember.run(() => {
+  run(() => {
     this.$().trigger(e);
   });
 
@@ -107,11 +109,11 @@ test('should not be able to toggle value if disabled', function(assert) {
     checked: true
   });
 
-  var e = Ember.$.Event('mousedown');
+  var e = $.Event('mousedown');
   e.clientX = this.$().position().left;
   e.clientY = this.$().position().top;
 
-  Ember.run(() => {
+  run(() => {
     this.$().trigger(e);
   });
 

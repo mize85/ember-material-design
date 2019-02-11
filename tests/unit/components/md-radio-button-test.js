@@ -1,9 +1,9 @@
+import { run } from '@ember/runloop';
+
 import {
     moduleForComponent,
     test
     } from 'ember-qunit';
-
-import Ember from 'ember';
 
 moduleForComponent('md-radio-button', {
     // Specify the other units that are required for this test
@@ -57,7 +57,7 @@ test('it updates if value == selected', function(assert) {
 
     assert.ok(!this.$().hasClass('md-checked'), 'Radio button does not have md-checked class');
 
-    Ember.run(() => {
+    run(() => {
         component.set('value', 'Hooray');
     });
 

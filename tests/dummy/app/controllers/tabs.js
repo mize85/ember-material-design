@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
+import ArrayProxy from '@ember/array/proxy';
+import { on } from '@ember/object/evented';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 export default BaseDemoController.extend({
@@ -17,11 +20,11 @@ export default BaseDemoController.extend({
 
     },
 
-    setStaticTabsContent: Ember.on('init', function() {
+    setStaticTabsContent: on('init', function() {
         var demoName = 'tabs-StaticTabs';
 
-        var sourceFiles = Ember.ArrayProxy.create({
-            content: Ember.A([
+        var sourceFiles = ArrayProxy.create({
+            content: A([
                 {name: 'hbs', content: demoName + '.hbs'},
                 {name: 'controller', content: 'tabs-staticTabs-controller.js'}
             ])
@@ -30,11 +33,11 @@ export default BaseDemoController.extend({
         this.set('sourceFilesStaticTabs', sourceFiles);
     }),
 
-    setDynamicHeightContent: Ember.on('init', function() {
+    setDynamicHeightContent: on('init', function() {
         var demoName = 'tabs-dynamicHeight';
 
-        var sourceFiles = Ember.ArrayProxy.create({
-            content: Ember.A([
+        var sourceFiles = ArrayProxy.create({
+            content: A([
                 {name: 'hbs', content: demoName + '.hbs'}
             ])
         });
@@ -42,8 +45,8 @@ export default BaseDemoController.extend({
         this.set('sourceFilesDynamicHeight', sourceFiles);
     }),
 
-    tabs: Ember.ArrayProxy.create({
-        content: Ember.A([
+    tabs: ArrayProxy.create({
+        content: A([
             { title: 'One', content: "Tabs will become paginated if there isn't enough room for them."},
             { title: 'Two', content: "You can swipe left and right on a mobile device to change tabs."},
             { title: 'Three', content: "You can bind the selected tab via the selected attribute on the md-tabs element."},
@@ -57,14 +60,14 @@ export default BaseDemoController.extend({
         ])
     }),
 
-    cantRemoveTabs: Ember.computed('tabs.length', function() {
+    cantRemoveTabs: computed('tabs.length', function() {
 
         return this.get('tabs.length') <= 1;
     }),
 
     selectedIndex: 2,
 
-    selectedTab: Ember.computed('selectedIndex', 'tabs.[]', function() {
+    selectedTab: computed('selectedIndex', 'tabs.[]', function() {
         return this.get('tabs').objectAt(this.get('selectedIndex'));
     }),
 
@@ -75,7 +78,7 @@ export default BaseDemoController.extend({
         bottom: false
     },
 
-    alignTabs: Ember.computed('data.bottom', function() {
+    alignTabs: computed('data.bottom', function() {
         return this.get('data.bottom') ? 'bottom' : 'top';
     }),
 

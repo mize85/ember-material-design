@@ -1,7 +1,11 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import {getOwner} from '@ember/application';
+import {computed, observer} from '@ember/object';
+import {later, schedule} from '@ember/runloop';
+import Component from '@ember/component';
 import LayoutRules from '../mixins/layout-rules';
 
-var MdToast = Ember.Component.extend(LayoutRules, {
+var MdToast = Component.extend(LayoutRules, {
   tagName: 'md-toast',
   classNameBindings: ['toast.capsule:md-capsule',
     'toast.open:ng-enter-active',
@@ -22,8 +26,8 @@ var MdToast = Ember.Component.extend(LayoutRules, {
   setupToast() {
 
     // TODO: this should run one frame after render, but not sure best way to implement
-    Ember.run.schedule('afterRender', () => {
-      Ember.run.later(this, () => {
+    schedule('afterRender', () => {
+      later(this, () => {
         this.set('toast.open', true);
       }, 16);
     });
@@ -31,7 +35,7 @@ var MdToast = Ember.Component.extend(LayoutRules, {
     var delay = this.get('toast.hideDelay');
 
     if (delay && delay > 0) {
-      Ember.run.later(this, () => {
+      later(this, () => {
         // destroy myself if I haven't been destroyed already.
         if (this.get('toast')) {
           this.set('toast.destroying', true);
@@ -40,7 +44,7 @@ var MdToast = Ember.Component.extend(LayoutRules, {
     }
   },
 
-  setRootElementClass: Ember.observer('toast.open', function() {
+  setRootElementClass: observer('toast.open', function () {
 
     if (this.get('toast.open')) {
       this.get('rootElement').addClass(this.get('toastOpenClass'));
@@ -55,18 +59,18 @@ var MdToast = Ember.Component.extend(LayoutRules, {
     }
   },
 
-  rootElement: Ember.computed(function() {
-    let rootElem = Ember.getOwner(this).lookup('application:main').get('rootElement');
+  rootElement: computed(function () {
+    let rootElem = getOwner(this).lookup('application:main').get('rootElement');
 
-    if(!rootElem){
+    if (!rootElem) {
       rootElem = "#ember-testing";
     }
-    return Ember.$(rootElem);
+    return $(rootElem);
   }),
 
-  positionBinding: Ember.computed('toast.position', function() {
+  positionBinding: computed('toast.position', function () {
     var position = this.get('toast.position'),
-        positions = '';
+      positions = '';
 
     if (!position) {
       return '';
@@ -82,7 +86,7 @@ var MdToast = Ember.Component.extend(LayoutRules, {
     return positions;
   }),
 
-  openClass: Ember.computed('toast.open', function() {
+  openClass: computed('toast.open', function () {
     if (this.get('toast.open')) {
       return 'ng-enter-active';
     }
@@ -90,7 +94,7 @@ var MdToast = Ember.Component.extend(LayoutRules, {
     return '';
   }),
 
-  destroyingClass: Ember.computed('toast.destroying', function() {
+  destroyingClass: computed('toast.destroying', function () {
     if (this.get('toast.destroying')) {
       return 'ng-leave ng-leave-active';
     }
@@ -98,7 +102,7 @@ var MdToast = Ember.Component.extend(LayoutRules, {
     return '';
   }),
 
-  destroying: Ember.observer('toast.destroying', function() {
+  destroying: observer('toast.destroying', function () {
     if (!this.get('toast.destroying')) {
       return;
     }
@@ -108,12 +112,12 @@ var MdToast = Ember.Component.extend(LayoutRules, {
     this.set('toast.opening', false);
     this.endPropertyChanges();
 
-    Ember.run.later(this, () => {
+    later(this, () => {
       this.set('toast.destroyed', true);
     }, 400);
   }),
 
-  buttonClass: Ember.computed('toast.highlightAction', function() {
+  buttonClass: computed('toast.highlightAction', function () {
 
     var highlight = this.get('toast.highlightAction');
 
@@ -125,7 +129,7 @@ var MdToast = Ember.Component.extend(LayoutRules, {
     return 'md-action';
   }),
 
-  toastOpenClass: Ember.computed('toast.position', function() {
+  toastOpenClass: computed('toast.position', function () {
     var position = this.get('toast.position');
 
     return 'md-toast-open-' + (position.indexOf('top') > -1 ? 'top' : 'bottom');
@@ -133,7 +137,7 @@ var MdToast = Ember.Component.extend(LayoutRules, {
   }),
 
   actions: {
-    action: function() {
+    action: function () {
       this.beginPropertyChanges();
 
       this.set('actionClicked', true);

@@ -32,6 +32,7 @@ md-tooltip {
       transform: translate(-50%, -50%) scale(1);
       opacity: 1;
     }
+
     &.md-hide {
       transition: $swift-ease-in;
       transform: translate(-50%, -50%) scale(0);
@@ -63,6 +64,7 @@ md-tooltip {
       transition: $swift-ease-out;
       opacity: 1;
     }
+
     &.md-hide {
       transition: $swift-ease-in;
       opacity: 0;

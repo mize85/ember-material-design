@@ -1,4 +1,8 @@
-import Ember from 'ember';
+import { copy } from '@ember/object/internals';
+import { A } from '@ember/array';
+import ArrayProxy from '@ember/array/proxy';
+import { on } from '@ember/object/evented';
+import { computed } from '@ember/object';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 export default BaseDemoController.extend({
@@ -16,17 +20,17 @@ export default BaseDemoController.extend({
 
     showSourceFromUrl: false,
 
-    showSourceClassFromUrl: Ember.computed('showSourceFromUrl', function() {
+    showSourceClassFromUrl: computed('showSourceFromUrl', function() {
         return this.get('showSourceFromUrl') ? 'show-source' : '';
     }),
 
     sourceFilesFromUrl: null,
 
-    setSourceFilesFromUrl: Ember.on('init', function() {
+    setSourceFilesFromUrl: on('init', function() {
         var demoName = 'icon-fromUrl';
 
-        var sourceFiles = Ember.ArrayProxy.create({
-            content: Ember.A([
+        var sourceFiles = ArrayProxy.create({
+            content: A([
                 {name: 'hbs', content: demoName + '.hbs'},
                 {name: 'controller', content: 'icon-controller.js'}
 
@@ -38,17 +42,17 @@ export default BaseDemoController.extend({
 
     showSourceFromSet: false,
 
-    showSourceClassFromSet: Ember.computed('showSourceFromSet', function() {
+    showSourceClassFromSet: computed('showSourceFromSet', function() {
         return this.get('showSourceFromSet') ? 'show-source' : '';
     }),
 
     sourceFilesFromSet: null,
 
-    setSourceFilesFromSet: Ember.on('init', function() {
+    setSourceFilesFromSet: on('init', function() {
         var demoName = 'icon-fromSet';
 
-        var sourceFiles = Ember.ArrayProxy.create({
-            content: Ember.A([
+        var sourceFiles = ArrayProxy.create({
+            content: A([
                 {name: 'hbs', content: demoName + '.hbs'},
                 {name: 'controller', content: 'icon-controller.js'}
 
@@ -84,13 +88,13 @@ export default BaseDemoController.extend({
         {size: 48, padding: 10, previewScaleStyle: 'padding-left: 10px', sizeStyle: 'font-size: 48px; height: 48px;'}
     ],
 
-    icons: Ember.computed('iconData', function() {
+    icons: computed('iconData', function() {
         var self = this;
 
         var iconData = this.get('iconData');
 
         iconData.forEach(function(i) {
-            i.sizes = Ember.A(Ember.copy(self.sizes, true));
+            i.sizes = A(copy(self.sizes, true));
 
             i.sizes.forEach(function(size) {
                 var color = !i.theme && i.color;
@@ -98,13 +102,13 @@ export default BaseDemoController.extend({
             });
         });
 
-        return Ember.A(this.get('iconData'));
+        return A(this.get('iconData'));
 
     }),
 
     insertDriveIconURL: 'images/icons/ic_insert_drive_file_24px.svg',
 
-    getAndroid: Ember.computed('', function() {
+    getAndroid: computed('', function() {
         return 'images/icons/android.svg';
     })
 

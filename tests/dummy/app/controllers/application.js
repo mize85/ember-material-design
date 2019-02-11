@@ -1,15 +1,17 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 
-var ApplicationController = Ember.Controller.extend({
+var ApplicationController = Controller.extend({
 
-    mediaQueries: Ember.inject.service('media-queries'),
+    mediaQueries: service('media-queries'),
 
     init: function() {
         this.get('mediaQueries').match('gt-sm', '(min-width: 600px)');
         //this.set('sidebarLocked', this.get('mediaQueries.isGtSm'));
     },
 
-    sidebarLocked: Ember.computed('mediaQueries.isGtSm', function() {
+    sidebarLocked: computed('mediaQueries.isGtSm', function() {
         return this.get('mediaQueries.isGtSm');
     }),
 

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 import HasLayoutMixin from 'ember-material-design/mixins/has-layout';
 import { module, test } from 'qunit';
 
@@ -6,7 +6,7 @@ module('HasLayoutMixin');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  var HasLayoutObject = Ember.Object.extend(HasLayoutMixin);
+  var HasLayoutObject = EmberObject.extend(HasLayoutMixin);
   var subject = HasLayoutObject.create();
   assert.ok(subject);
 });

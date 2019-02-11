@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'md-fab-speed-dial',
   'md-direction': 'down',
   classNameBindings: ['md-open:md-is-open', 'directionClass'],
@@ -12,11 +13,11 @@ export default Ember.Component.extend({
 
 
   setupComponent() {
-    this.addObserver('md-open', function() {
+    this.addObserver('md-open', function () {
       this.processAnimations();
     });
 
-    this.addObserver('md-direction', function() {
+    this.addObserver('md-direction', function () {
       this.processAnimations();
     });
 
@@ -44,7 +45,7 @@ export default Ember.Component.extend({
     this.set('md-open', false);
   },
 
-  directionClass: Ember.computed('md-direction', function() {
+  directionClass: computed('md-direction', function () {
     var direction = this.get('md-direction');
     return `md-${direction}`;
   }),

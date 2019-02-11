@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 import RippleMixin from '../mixins/ripples';
 import LayoutRules from '../mixins/layout-rules';
 
-var MdCheckbox = Ember.Component.extend(LayoutRules, RippleMixin, {
-  constants: Ember.inject.service('constants'),
+var MdCheckbox = Component.extend(LayoutRules, RippleMixin, {
+  constants: service('constants'),
   tagName: 'md-checkbox',
   classNames: ['md-checkbox'],
   classNameBindings: ['checked:md-checked'],
@@ -17,7 +19,7 @@ var MdCheckbox = Ember.Component.extend(LayoutRules, RippleMixin, {
     this.get('rippleService').setupCheckbox(this, this.$('.md-container'));
   },
 
-  isDisabled: Ember.computed('disabled', function() {
+  isDisabled: computed('disabled', function () {
     return this.get('disabled') ? 'disabled' : null;
   }),
 

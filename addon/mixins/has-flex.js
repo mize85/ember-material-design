@@ -1,7 +1,7 @@
-import Ember from 'ember';
-const {get} = Ember;
+import Mixin from '@ember/object/mixin';
+import {get} from '@ember/object';
 
-let HasFlexMixin = Ember.Mixin.create({
+let HasFlexMixin = Mixin.create({
   init() {
     this._super();
 
@@ -9,12 +9,12 @@ let HasFlexMixin = Ember.Mixin.create({
       tagName,
     } = this;
 
-    if(tagName && tagName.length){
+    if (tagName && tagName.length) {
 
       let newAttributeBindings = ['flex'];
       const bindings = get(this, 'attributeBindings');
-      if(bindings){
-        newAttributeBindings= newAttributeBindings.concat(bindings);
+      if (bindings) {
+        newAttributeBindings = newAttributeBindings.concat(bindings);
       }
       this.set('attributeBindings', newAttributeBindings);
     }

@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import LayoutRules from '../mixins/layout-rules';
 
-export default Ember.Component.extend(LayoutRules, {
+export default Component.extend(LayoutRules, {
   tagName: 'md-list'
 });

@@ -1,1 +1,1 @@
-export { default } from 'ember-material-design/models/toast';
+export {default} from 'ember-material-design/models/toast';

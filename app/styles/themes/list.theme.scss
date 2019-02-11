@@ -4,6 +4,7 @@ md-list {
     h3, h4 {
       color: color($foreground, '1');
     }
+
     p {
       color: color($foreground, '2');
     }
@@ -18,11 +19,13 @@ md-list {
 
     &.md-highlight {
       color: color($primary);
+
       &.md-accent {
         color: color($accent);
       }
     }
   }
+
   md-list-item button {
     background-color: color($background);
 

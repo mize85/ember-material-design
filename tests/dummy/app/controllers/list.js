@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 export default BaseDemoController.extend({
@@ -12,7 +13,7 @@ export default BaseDemoController.extend({
         this.setSourceFiles(content);
     },
 
-    todos: Ember.A([
+    todos: A([
         {
             face : 'http://lorempixel.com/50/50/people',
             what: 'Brunch this weekend?',
@@ -50,7 +51,7 @@ export default BaseDemoController.extend({
         }
     ]),
 
-    firstTodo: Ember.computed('', function() {
+    firstTodo: computed('', function() {
         return this.get('todos')[0];
     })
 });

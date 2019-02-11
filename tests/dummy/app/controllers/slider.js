@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { htmlSafe } from '@ember/string';
+import { computed } from '@ember/object';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 export default BaseDemoController.extend({
@@ -17,8 +18,8 @@ export default BaseDemoController.extend({
         blue: Math.floor(Math.random() * 255)
     },
 
-    colorStyle: Ember.computed('color.red', 'color.green', 'color.blue', function() {
-        return Ember.String.htmlSafe("border: 1px solid #333; background: rgb(" + this.get('color.red') + "," + this.get('color.green') + "," + this.get('color.blue') + ")");
+    colorStyle: computed('color.red', 'color.green', 'color.blue', function() {
+        return htmlSafe("border: 1px solid #333; background: rgb(" + this.get('color.red') + "," + this.get('color.green') + "," + this.get('color.blue') + ")");
     }),
 
     rating1: 3,

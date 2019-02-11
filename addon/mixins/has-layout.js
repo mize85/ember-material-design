@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
+import {get} from '@ember/object';
 
-const {get} = Ember;
-
-let HasLayoutMixin = Ember.Mixin.create({
+let HasLayoutMixin = Mixin.create({
 
 
   init() {
@@ -12,11 +11,11 @@ let HasLayoutMixin = Ember.Mixin.create({
       tagName,
     } = this;
 
-    if(tagName && tagName.length){
+    if (tagName && tagName.length) {
       let newAttributeBindings = ['layoutType:layout', 'layout-align'];
       const bindings = get(this, 'attributeBindings');
-      if(bindings){
-        newAttributeBindings= newAttributeBindings.concat(bindings);
+      if (bindings) {
+        newAttributeBindings = newAttributeBindings.concat(bindings);
       }
       this.set('attributeBindings', newAttributeBindings);
     }

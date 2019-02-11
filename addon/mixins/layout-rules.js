@@ -1,56 +1,56 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 
 const layoutProperties = [
-    'layout',
-    'layout-align',
-    'flex-order',
-    'flex',
-    'offset',
-    'hide',
-    'show'
+  'layout',
+  'layout-align',
+  'flex-order',
+  'flex',
+  'offset',
+  'hide',
+  'show'
 
 ];
 
 const layoutSingleRules = [
-    'layout-type:layout',
-    'layout-padding',
-    'layout-margin',
-    'layout-wrap',
-    'layout-fill'
+  'layout-type:layout',
+  'layout-padding',
+  'layout-margin',
+  'layout-wrap',
+  'layout-fill'
 ];
 
 const sizeNames = [
-    'sm',
-    'gt-sm',
-    'md',
-    'gt-md',
-    'lg',
-    'gt-lg'
+  'sm',
+  'gt-sm',
+  'md',
+  'gt-md',
+  'lg',
+  'gt-lg'
 
 ];
 
-var finalRules = function(){
-    var ret = [];
-    var self = this;
+var finalRules = function () {
+  var ret = [];
+  var self = this;
 
-    layoutProperties.forEach(function(layoutProperty){
-        sizeNames.forEach(function(sizeName){
-            ret.push(layoutProperty + '-' + sizeName);
-        });
-    
-        ret.push('hide');
-        ret.push('show');
+  layoutProperties.forEach(function (layoutProperty) {
+    sizeNames.forEach(function (sizeName) {
+      ret.push(layoutProperty + '-' + sizeName);
     });
-    
-    ret.push.apply(ret, layoutSingleRules);
-    
-    return ret;
-  };
+
+    ret.push('hide');
+    ret.push('show');
+  });
+
+  ret.push.apply(ret, layoutSingleRules);
+
+  return ret;
+};
 
 
-var LayoutRulesMixin = Ember.Mixin.create({
+var LayoutRulesMixin = Mixin.create({
 
-    attributeBindings: finalRules()
+  attributeBindings: finalRules()
 
 });
 

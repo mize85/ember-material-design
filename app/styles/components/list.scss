@@ -39,6 +39,7 @@ md-list-item {
   &.md-proxy-focus.md-focused .md-no-style {
     transition: background-color 0.15s linear;
   }
+
   &.md-no-proxy,
   .md-no-style {
     position: relative;
@@ -55,13 +56,16 @@ md-list-item {
       flex-direction: inherit;
       align-items: inherit;
     }
+
     &:focus {
       outline: none;
     }
   }
+
   &.md-with-secondary {
     position: relative;
   }
+
   &.md-clickable:hover {
     cursor: pointer;
   }
@@ -71,6 +75,7 @@ md-list-item {
     bottom: 0;
     left: 0;
     width: 100%;
+
     &[md-inset] {
       left: $list-item-inset-divider-offset;
       width: calc(100% - #{$list-item-inset-divider-offset});
@@ -95,22 +100,28 @@ md-list-item, md-list-item .md-list-item-inner {
     margin-bottom: 12px;
     box-sizing: content-box;
   }
+
   & > div.md-primary > md-checkbox,
   & > div.md-secondary > md-checkbox,
   & > md-checkbox:first-child,
   md-checkbox.md-secondary {
     align-self: center;
-    .md-label { display: none; }
+
+    .md-label {
+      display: none;
+    }
   }
 
   & > md-icon:first-child {
     margin-right: $list-item-primary-width - $list-item-primary-icon-width;
   }
+
   & > md-checkbox:first-child {
     width: 3 * $baseline-grid;
     margin-left: 3px;
     margin-right: 29px;
   }
+
   & > .md-avatar:first-child {
     width: $list-item-primary-avatar-width;
     height: $list-item-primary-avatar-width;
@@ -134,6 +145,7 @@ md-list-item, md-list-item .md-list-item-inner {
     border-radius: 50%;
     margin: 0;
     min-width: 0;
+
     .md-ripple,
     .md-ripple-container {
       border-radius: 50%;
@@ -181,12 +193,14 @@ md-list-item.md-3-line > .md-no-style {
       margin: $list-h3-margin;
       line-height: $list-header-line-height;
     }
+
     h4 {
       @include md-body-2();
       font-weight: $list-h4-font-weight;
       margin: $list-h4-margin;
       line-height: $list-header-line-height;
     }
+
     p {
       @include md-body-2();
       margin: $list-p-margin;
@@ -200,9 +214,11 @@ md-list-item.md-2-line > .md-no-style {
   > .md-avatar:first-child {
     margin-top: $baseline-grid * 1.5;
   }
+
   > md-icon:first-child {
     align-self: flex-start;
   }
+
   .md-list-item-text {
     flex: 1;
     padding-top: ($baseline-grid * 2.5) - 1;

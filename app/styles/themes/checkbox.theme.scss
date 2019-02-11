@@ -2,6 +2,7 @@ md-checkbox {
   .md-ripple {
     color: color($accent, "600");
   }
+
   &.md-checked .md-ripple {
     color: color($background, "600");
   }
@@ -9,6 +10,7 @@ md-checkbox {
   .md-icon {
     border-color: color($foreground, "2");
   }
+
   &.md-checked .md-icon {
     background-color: rgba(color($accent), 0.87);
   }
@@ -22,6 +24,7 @@ md-checkbox {
       .md-ripple {
         color: color($primary, "600");
       }
+
       &.md-checked .md-ripple {
         color: color($background, "600");
       }
@@ -29,6 +32,7 @@ md-checkbox {
       .md-icon {
         border-color: color($foreground, "2");
       }
+
       &.md-checked .md-icon {
         background-color: rgba(color($primary), 0.87);
       }
@@ -46,6 +50,7 @@ md-checkbox {
       .md-icon {
         border-color: color($foreground, "2");
       }
+
       &.md-checked .md-icon {
         background-color: rgba(color($warn), 0.87);
       }

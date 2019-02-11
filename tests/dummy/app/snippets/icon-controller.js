@@ -1,6 +1,9 @@
-import Ember from 'ember';
+import { copy } from '@ember/object/internals';
+import { A } from '@ember/array';
+import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   iconData: [
     {name: 'icon-home'        , color: "#777" },
@@ -18,13 +21,13 @@ export default Ember.Controller.extend({
     {size:48,padding:10, previewScaleStyle: 'padding-left: 10px', sizeStyle: 'font-size: 48px; height: 48px;'}
   ],
 
-  icons: Ember.computed('iconData', function() {
+  icons: computed('iconData', function() {
     var self = this;
 
     var iconData = this.get('iconData');
 
     iconData.forEach(function(i) {
-      i.sizes = Ember.A(Ember.copy(self.sizes, true));
+      i.sizes = A(copy(self.sizes, true));
 
       i.sizes.forEach(function(size) {
         var color = !i.theme && i.color;
@@ -32,13 +35,13 @@ export default Ember.Controller.extend({
       });
     });
 
-    return Ember.A(this.get('iconData'));
+    return A(this.get('iconData'));
 
   }),
 
   insertDriveIconURL: 'images/icons/ic_insert_drive_file_24px.svg',
 
-  getAndroid: Ember.computed('', function() {
+  getAndroid: computed('', function() {
     return 'images/icons/android.svg';
   })
 

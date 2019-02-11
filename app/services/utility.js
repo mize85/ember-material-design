@@ -1,31 +1,31 @@
-import Ember from 'ember';
+import Service from '@ember/service';
 
 function getNode(el) {
-    return el[0] || el;
+  return el[0] || el;
 }
 
-var UtilityService = Ember.Service.extend({
+var UtilityService = Service.extend({
 
-    clientRect(element, offsetParent, isOffsetRect) {
-        var node = getNode(element);
-        offsetParent = getNode(offsetParent || node.offsetParent || document.body);
-        var nodeRect = node.getBoundingClientRect();
+  clientRect(element, offsetParent, isOffsetRect) {
+    var node = getNode(element);
+    offsetParent = getNode(offsetParent || node.offsetParent || document.body);
+    var nodeRect = node.getBoundingClientRect();
 
-        var offsetRect = isOffsetRect ?
-            offsetParent.getBoundingClientRect() :
-            { left: 0, top: 0, width: 0, height: 0 };
+    var offsetRect = isOffsetRect ?
+      offsetParent.getBoundingClientRect() :
+      {left: 0, top: 0, width: 0, height: 0};
 
-        return {
-            left: nodeRect.left - offsetRect.left,
-            top: nodeRect.top - offsetRect.top,
-            width: nodeRect.width,
-            height: nodeRect.height
-        };
-    },
+    return {
+      left: nodeRect.left - offsetRect.left,
+      top: nodeRect.top - offsetRect.top,
+      width: nodeRect.width,
+      height: nodeRect.height
+    };
+  },
 
-    offsetRect(element, offsetParent) {
-        return this.clientRect(element, offsetParent, true);
-    }
+  offsetRect(element, offsetParent) {
+    return this.clientRect(element, offsetParent, true);
+  }
 
 
 });

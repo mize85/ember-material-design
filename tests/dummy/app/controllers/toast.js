@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
+import { inject as service } from '@ember/service';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 var ToastController = BaseDemoController.extend({
@@ -13,9 +15,9 @@ var ToastController = BaseDemoController.extend({
     this.setSourceFiles(content);
   },
 
-  toastService: Ember.inject.service('toasts'),
+  toastService: service('toasts'),
 
-  toastPosition: Ember.A([
+  toastPosition: A([
     {
       name: 'bottom',
       enabled: false
@@ -31,11 +33,11 @@ var ToastController = BaseDemoController.extend({
     }
   ]),
 
-  toastNotifications: Ember.computed('toastService.toasts.[]', function() {
-    return Ember.A(this.get('toastService.toasts'));
+  toastNotifications: computed('toastService.toasts.[]', function() {
+    return A(this.get('toastService.toasts'));
   }),
 
-  toastPositionText: Ember.computed('toastPosition.@each.enabled', function() {
+  toastPositionText: computed('toastPosition.@each.enabled', function() {
     var tp = this.get('toastPosition'),
       tpString = '';
 

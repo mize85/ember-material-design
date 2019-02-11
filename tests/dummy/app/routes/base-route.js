@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 
-var BaseRoute = Ember.Route.extend({
+var BaseRoute = Route.extend({
 	setupController: function(controller, model) {
 		this._super(controller, model);
 

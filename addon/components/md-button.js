@@ -1,41 +1,42 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 import RipplesMixin from '../mixins/ripples';
 import LayoutRules from '../mixins/layout-rules';
 
-var MdButtonComponent = Ember.Component.extend(LayoutRules, RipplesMixin, {
+var MdButtonComponent = Component.extend(LayoutRules, RipplesMixin, {
 
-    tagName: 'button',
+  tagName: 'button',
 
-    classNames: ['md-button'],
+  classNames: ['md-button'],
 
-    attributeBindings: ['disabled', 'href', 'type', 'target', 'action'],
+  attributeBindings: ['disabled', 'href', 'type', 'target', 'action'],
 
-    didInsertElement() {
-        this._super(...arguments);
+  didInsertElement() {
+    this._super(...arguments);
 
-        const rs = this.get('rippleService');
-        if(rs) rs.setupButton(this, this.$());
+    const rs = this.get('rippleService');
+    if (rs) rs.setupButton(this, this.$());
 
-        //if (this.get('action')) {
-        //  this.$().attr('md-has-action', true);
-        //}
-    },
+    //if (this.get('action')) {
+    //  this.$().attr('md-has-action', true);
+    //}
+  },
 
-    buttonClassNames: Ember.computed('classNames', function() {
+  buttonClassNames: computed('classNames', function () {
 
-        var classNames = '';
+    var classNames = '';
 
-        this.get('classNames').forEach((cn) => {
-            classNames = classNames + " " + (cn);
-        });
+    this.get('classNames').forEach((cn) => {
+      classNames = classNames + " " + (cn);
+    });
 
-        return classNames;
+    return classNames;
 
-    }),
+  }),
 
-    click() {
-        this.sendAction('action', this.get('param'));
-    }
+  click() {
+    this.sendAction('action', this.get('param'));
+  }
 
 });
 

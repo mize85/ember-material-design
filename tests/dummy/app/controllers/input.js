@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import ArrayProxy from '@ember/array/proxy';
+import { on } from '@ember/object/evented';
+import { computed } from '@ember/object';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 export default BaseDemoController.extend({
@@ -13,17 +16,17 @@ export default BaseDemoController.extend({
 
     showSourceIcons: false,
 
-    showSourceClassIcons: Ember.computed('showSourceIcons', function() {
+    showSourceClassIcons: computed('showSourceIcons', function() {
         return this.get('showSourceIcons') ? 'show-source' : '';
     }),
 
     sourceFilesIcons: null,
 
-    setSourceFilesIcons: Ember.on('init', function() {
+    setSourceFilesIcons: on('init', function() {
         var demoName = 'input-Icons';
 
-        var sourceFiles = Ember.ArrayProxy.create({
-            content: Ember.A([
+        var sourceFiles = ArrayProxy.create({
+            content: A([
                 {name: 'hbs', content: demoName + '.hbs'},
                 {name: 'controller', content: 'input-controller.js'}
 
@@ -33,22 +36,22 @@ export default BaseDemoController.extend({
         this.set('sourceFilesIcons', sourceFiles);
     }),
 
-    emailInvalid: Ember.computed('user2.email', function() {
+    emailInvalid: computed('user2.email', function() {
       return !this.get('user2.email') || this.get('user2.email').length <= 0;
     }),
 
-    postalCodeValidations: Ember.computed('user.postalCode', function() {
+    postalCodeValidations: computed('user.postalCode', function() {
       var errors = [];
 
       if (!this.get('user.postalCode') || this.get('user.postalCode').length === 0) {
         errors.push('This is required');
       }
 
-      return Ember.A(errors);
+      return A(errors);
 
     }),
 
-    hasPostalCodeErrors: Ember.computed('postalCodeValidations.length', function() {
+    hasPostalCodeErrors: computed('postalCodeValidations.length', function() {
       return this.get('postalCodeValidations.length') > 0;
     }),
 

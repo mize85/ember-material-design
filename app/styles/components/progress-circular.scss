@@ -9,7 +9,7 @@ $progress-circular-size: 50px !default;
   0% {
     transform: rotate(0deg);
   }
-  
+
   100% {
     transform: rotate(360deg);
   }
@@ -73,6 +73,7 @@ md-progress-circular {
     width: $progress-circular-size;
     height: $progress-circular-size;
     position: relative;
+
     .md-gap {
       position: absolute;
       left: $progress-circular-size * 0.5 - 1;
@@ -83,12 +84,14 @@ md-progress-circular {
       border-top-style: solid;
       box-sizing: border-box;
     }
+
     .md-left, .md-right {
       position: absolute;
       top: 0;
       height: $progress-circular-size;
       width: $progress-circular-size * 0.5;
       overflow: hidden;
+
       .md-half-circle {
         position: absolute;
         top: 0;
@@ -101,15 +104,19 @@ md-progress-circular {
         border-radius: 50%;
       }
     }
+
     .md-left {
       left: 0;
+
       .md-half-circle {
         left: 0;
         border-right-color: transparent;
       }
     }
+
     .md-right {
       right: 0;
+
       .md-half-circle {
         right: 0;
         border-left-color: transparent;
@@ -133,6 +140,7 @@ md-progress-circular {
             }
           }
         }
+
         .md-right {
           .md-half-circle {
             @if $i <= 50 {
@@ -144,6 +152,7 @@ md-progress-circular {
             }
           }
         }
+
         .md-gap {
           border-bottom-width: 5px;
           border-bottom-style: solid;
@@ -162,8 +171,10 @@ md-progress-circular {
   &[md-mode=indeterminate] {
     .md-spinner-wrapper {
       animation: outer-rotate $progress-circular-outer-duration linear infinite;
+
       .md-inner {
         animation: sporadic-rotate $progress-circular-sporadic-duration $progress-circular-ease-in-out infinite;
+
         .md-left, .md-right {
           .md-half-circle {
             animation-iteration-count: infinite;
@@ -171,11 +182,13 @@ md-progress-circular {
             animation-timing-function: $progress-circular-ease-in-out;
           }
         }
+
         .md-left {
           .md-half-circle {
             animation-name: left-wobble;
           }
         }
+
         .md-right {
           .md-half-circle {
             animation-name: right-wobble;
@@ -191,13 +204,16 @@ md-progress-circular.ng-hide {
   &[md-mode=indeterminate] {
     .md-spinner-wrapper {
       animation: none;
+
       .md-inner {
         animation: none;
+
         .md-left {
           .md-half-circle {
             animation-name: none;
           }
         }
+
         .md-right {
           .md-half-circle {
             animation-name: none;

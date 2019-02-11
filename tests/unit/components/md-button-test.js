@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 
 import {
   moduleForComponent,
@@ -30,7 +30,7 @@ test('it should have md-ripple-container after click', function(assert) {
 
   var position = this.$().position();
 
-  Ember.run(() => {
+  run(() => {
     this.$().triggerHandler({type: 'mousedown', clientX: position.left, clientY: position.top});
   });
 
@@ -46,7 +46,7 @@ test('it should not have md-ripple-container if mdNoInk attribute is set', funct
 
   var position = this.$().position();
 
-  Ember.run(() => {
+  run(() => {
     this.$().triggerHandler({type: 'mousedown', clientX: position.left, clientY: position.top});
   });
 

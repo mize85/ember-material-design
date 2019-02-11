@@ -1,6 +1,5 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-var MdBackdrop = Ember.Component.extend({
-});
+var MdBackdrop = Component.extend({});
 
 export default MdBackdrop;

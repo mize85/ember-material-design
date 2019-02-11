@@ -39,6 +39,7 @@
 [layout-padding] > [flex-lt-lg] {
   padding: $layout-gutter-width / 2;
 }
+
 [layout-padding] > [flex-gt-md],
 [layout-padding] > [flex-lg] {
   padding: $layout-gutter-width / 1;
@@ -60,7 +61,7 @@
 [layout-margin] > [flex-gt-md],
 [layout-margin] > [flex-lg] {
   margin: $layout-gutter-width / 1;
-} 
+}
 
 
 [layout-wrap] {

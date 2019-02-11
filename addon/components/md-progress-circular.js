@@ -1,30 +1,33 @@
-import Ember from 'ember';
+import {htmlSafe} from '@ember/string';
+import {computed} from '@ember/object';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 import LayoutRules from '../mixins/layout-rules';
 
-var MdProgressCircular = Ember.Component.extend(LayoutRules, {
-    constants: Ember.inject.service('constants'),
+var MdProgressCircular = Component.extend(LayoutRules, {
+  constants: service('constants'),
 
-    tagName: 'md-progress-circular',
+  tagName: 'md-progress-circular',
 
-    attributeBindings: ['value', 'md-mode'],
+  attributeBindings: ['value', 'md-mode'],
 
-    mdDiameter: 48,
+  mdDiameter: 48,
 
-    scale: Ember.computed('mdDiameter', function() {
-        return this.get('mdDiameter') / 48;
-    }),
+  scale: computed('mdDiameter', function () {
+    return this.get('mdDiameter') / 48;
+  }),
 
-    clampedValue: Ember.computed('value', function() {
+  clampedValue: computed('value', function () {
 
-        var value = this.get('value');
+    var value = this.get('value');
 
-        return Math.max(0, Math.min(value || 0, 100));
+    return Math.max(0, Math.min(value || 0, 100));
 
-    }),
+  }),
 
-    circleStyle: Ember.computed('scale', function() {
-        return Ember.String.htmlSafe(this.get('constants.CSS.TRANSFORM') + ': ' + 'scale(' + this.get('scale').toString() + ')');
-    })
+  circleStyle: computed('scale', function () {
+    return htmlSafe(this.get('constants.CSS.TRANSFORM') + ': ' + 'scale(' + this.get('scale').toString() + ')');
+  })
 
 });
 

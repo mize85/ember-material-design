@@ -10,9 +10,11 @@ a.button,
     &:hover {
       background-color: rgba(color($background, "500"), 0.2);
     }
+
     &.md-focused {
       background-color: rgba(color($background, "500"), 0.2);
     }
+
     &.md-icon-button:hover {
       background-color: transparent;
     }
@@ -31,6 +33,7 @@ a.button,
       &:hover {
         background-color: color($accent, 'A200');
       }
+
       &.md-focused {
         background-color: color($accent, 'A700');
       }
@@ -43,6 +46,7 @@ a.button,
 
   &.md-primary {
     color: color($primary);
+
     &.md-raised,
     &.md-fab {
       color: color($primary, "contrast");
@@ -56,6 +60,7 @@ a.button,
         &:hover {
           background-color: color($primary);
         }
+
         &.md-focused {
           background-color: color($primary, "600");
         }
@@ -67,10 +72,12 @@ a.button,
     border-radius: $button-fab-border-radius;
     background-color: color($accent, "A200");
     color: color($accent, contrast);
+
     &:not([disabled]) {
       &:hover {
         background-color: color($accent, "A200");
       }
+
       &.md-focused {
         background-color: color($accent, "A700");
       }
@@ -80,13 +87,16 @@ a.button,
   &.md-raised {
     color: color($background, contrast);
     background-color: color($background, "50");
+
     &:not([disabled]) {
       .md-icon {
         color: color($background, 'contrast');
       }
+
       &:hover {
         background-color: color($background, "50");
       }
+
       &.md-focused {
         background-color: color($background, "200");
       }
@@ -105,9 +115,11 @@ a.button,
         md-icon {
           color: color($warn, 'contrast');
         }
+
         &:hover {
           background-color: color($warn);
         }
+
         &.md-focused {
           background-color: color($warn, "700");
         }
@@ -127,14 +139,17 @@ a.button,
         md-icon {
           color: color($accent, 'contrast');
         }
+
         &:hover {
           background-color: color($accent);
         }
+
         &.md-focused {
           background-color: color($accent, "700");
         }
       }
     }
+
     &:not([disabled]) {
       md-icon {
         color: color($accent, 'contrast');
@@ -154,10 +169,12 @@ a.button,
       color: color($foreground, '3');
     }
   }
+
   &.md-raised[disabled],
   &.md-fab[disabled] {
     background-color: color($foreground, '4');
   }
+
   &[disabled] {
     background-color: transparent;
   }

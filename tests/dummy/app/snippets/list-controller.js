@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-    todos: Ember.A([
+export default Controller.extend({
+    todos: A([
         {
             face : 'http://lorempixel.com/50/50/people',
             what: 'Brunch this weekend?',
@@ -39,7 +41,7 @@ export default Ember.Controller.extend({
         }
     ]),
 
-    firstTodo: Ember.computed('', function() {
+    firstTodo: computed('', function() {
         return this.get('todos')[0];
     })
 });

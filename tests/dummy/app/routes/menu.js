@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
 import BaseRoute from './base-route';
 
 export default BaseRoute.extend({
 
   demoName: 'Menu',
 
-  iconService: Ember.inject.service('icon'),
+  iconService: service('icon'),
 
   setupController(controller, model) {
     this._super(...arguments);

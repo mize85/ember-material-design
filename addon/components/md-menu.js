@@ -1,4 +1,8 @@
-import Ember from 'ember';
+import {debounce, later, schedule, scheduleOnce} from '@ember/runloop';
+import {computed, observer} from '@ember/object';
+import {getOwner} from '@ember/application';
+import Component from '@ember/component';
+import $ from 'jquery';
 
 function findParent($rootElement) {
   var el;
@@ -13,7 +17,7 @@ function findParent($rootElement) {
     el = document[0].body;
   }
 
-  return Ember.$(el);
+  return $(el);
 
 }
 
@@ -24,7 +28,7 @@ function clamp(pos, bounds, containerNode) {
 
 const MENU_EDGE_MARGIN = 8;
 
-var MdMenuComponent = Ember.Component.extend({
+var MdMenuComponent = Component.extend({
 
   tagName: 'md-menu',
   mdOffset: '',
@@ -50,26 +54,26 @@ var MdMenuComponent = Ember.Component.extend({
   },
 
   setupMenuContents() {
-    this.backdrop = Ember.$('<md-backdrop class="md-menu-backdrop md-click-catcher">');
+    this.backdrop = $('<md-backdrop class="md-menu-backdrop md-click-catcher">');
 
-    let rootElem = Ember.getOwner(this).lookup('application:main').get('rootElement');
+    let rootElem = getOwner(this).lookup('application:main').get('rootElement');
 
-    if(!rootElem){
+    if (!rootElem) {
       rootElem = "#ember-testing";
     }
 
-    this.rootElement = Ember.$(rootElem);
+    this.rootElement = $(rootElem);
     this.parent = findParent(this.rootElement);
 
     // move the menu content to a the menu container
-    this.menuContainer = Ember.$('<div class="md-open-menu-container md-whiteframe-z2"></div>');
+    this.menuContainer = $('<div class="md-open-menu-container md-whiteframe-z2"></div>');
     this.menuContents = this.$().children()[1];
-    this.$menuContents = Ember.$(this.menuContents);
+    this.$menuContents = $(this.menuContents);
     this.menuContainer.append(this.menuContents);
 
   },
 
-  toggleVisibility: Ember.observer('isOpen', function() {
+  toggleVisibility: observer('isOpen', function () {
     if (this.get('isOpen')) {
       this.openMenu();
     } else {
@@ -87,16 +91,16 @@ var MdMenuComponent = Ember.Component.extend({
 
     this.menuContainer.removeClass('md-leave');
 
-    Ember.run.later(this, this.activateInteraction, 75);
+    later(this, this.activateInteraction, 75);
 
-    Ember.$(window).on('resize.md-menu', () => {
-      Ember.run.debounce(this, () => {
+    $(window).on('resize.md-menu', () => {
+      debounce(this, () => {
         this.positionMenu(this.menuContainer);
       }, 16);
 
     });
-    Ember.$(window).on('orientationchange.md-menu', () => {
-      Ember.run.debounce(this, () => {
+    $(window).on('orientationchange.md-menu', () => {
+      debounce(this, () => {
         this.positionMenu(this.menuContainer);
       }, 16);
     });
@@ -107,13 +111,13 @@ var MdMenuComponent = Ember.Component.extend({
   closeMenu() {
     this.set('isRemoved', true);
 
-    if(this.menuContainer){
+    if (this.menuContainer) {
       this.menuContainer.removeClass('md-active')
         .addClass('md-leave');
 
-      Ember.run.later(this, () => {
+      later(this, () => {
 
-        if(this.menuContainer){
+        if (this.menuContainer) {
           this.menuContainer.removeClass('md-clickable');
           this.menuContainer.remove();
         }
@@ -122,7 +126,7 @@ var MdMenuComponent = Ember.Component.extend({
           this.backdrop.remove();
         }
 
-        Ember.$(window).off('.md-menu');
+        $(window).off('.md-menu');
 
       }, 350);
     }
@@ -185,10 +189,10 @@ var MdMenuComponent = Ember.Component.extend({
   },
 
   showMenu() {
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       this.positionMenu(this.menuContainer);
 
-      Ember.run.scheduleOnce('afterRender', () => {
+      scheduleOnce('afterRender', () => {
         window.requestAnimationFrame(() => {
           this.menuContainer.addClass('md-active');
           this.set('alreadyOpen', true);
@@ -200,7 +204,7 @@ var MdMenuComponent = Ember.Component.extend({
 
   },
 
-  positionMode: Ember.computed('md-position-mode', function() {
+  positionMode: computed('md-position-mode', function () {
     var attachment = (this.get('md-position-mode') || 'target').split(' ');
 
     // If atachment is a single item, duplicate it for our second value
@@ -215,7 +219,7 @@ var MdMenuComponent = Ember.Component.extend({
     };
   }),
 
-  offsets: Ember.computed('md-offset', function() {
+  offsets: computed('md-offset', function () {
     var offsets = (this.get('md-offset') || '0 0').split(' ').map(parseFloat);
     if (offsets.length === 2) {
       return {

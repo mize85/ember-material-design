@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'md-fab-toolbar',
   classNames: ['md-fab-toolbar'],
   classNameBindings: ['md-open:md-is-open'],
@@ -17,7 +17,7 @@ export default Ember.Component.extend({
     fabTrigger.find('button').attr('tabindex', '-1');
     fabTrigger.find('button').prepend('<div class="md-fab-toolbar-background"></div>');
 
-    this.addObserver('md-open', function() {
+    this.addObserver('md-open', function () {
       this.runAnimation();
     });
 

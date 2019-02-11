@@ -113,6 +113,7 @@ $icon-button-margin: rem(0.600) !default;
     padding-right: 0;
     width: $icon-button-width;
     border-radius: 50%;
+
     .md-ripple-container {
       border-radius: 50%;
       background-clip: padding-box;
@@ -171,6 +172,7 @@ $icon-button-margin: rem(0.600) !default;
       &:focus {
         @include md-shadow-bottom-z-1();
       }
+
       &:active {
         @include md-shadow-bottom-z-2();
       }
@@ -182,6 +184,7 @@ $icon-button-margin: rem(0.600) !default;
   .md-button.md-fab-top-left,
   .md-button.md-fab-top-right {
     transform: translate3d(0, $button-fab-toast-offset, 0);
+
     &:not([disabled]) {
       &:focus,
       &:hover {
@@ -195,6 +198,7 @@ $icon-button-margin: rem(0.600) !default;
   .md-button.md-fab-bottom-left,
   .md-button.md-fab-bottom-right {
     transform: translate3d(0, -$button-fab-toast-offset, 0);
+
     &:not([disabled]) {
       &:focus,
       &:hover {
@@ -229,12 +233,12 @@ $icon-button-margin: rem(0.600) !default;
   &:first-child {
     border-radius: 2px 0px 0px 2px;
   }
+
   &:last-child {
     border-right-width: 1px;
     border-radius: 0px 2px 2px 0px;
   }
 }
-
 
 
 @media screen and (-ms-high-contrast: active) {

@@ -15,7 +15,7 @@ md-progress-linear:not([md-mode="indeterminate"]) {
   }
 
   .md-container.md-ready {
-    transform: translate(0, 0) scale(1,1);
+    transform: translate(0, 0) scale(1, 1);
   }
 
   .md-bar {
@@ -65,6 +65,7 @@ md-progress-linear[md-mode="indeterminate"] {
   width: 100%;
   height: $progress-linear-bar-height;
   position: relative;
+
   .md-container {
     width: 100%;
     overflow: hidden;
@@ -72,6 +73,7 @@ md-progress-linear[md-mode="indeterminate"] {
     height: $progress-linear-bar-height;
     top: $progress-linear-bar-height;
     transition: all .3s linear;
+
     .md-bar {
       height: $progress-linear-bar-height;
       left: 0;
@@ -80,13 +82,15 @@ md-progress-linear[md-mode="indeterminate"] {
       top: 0;
       bottom: 0;
     }
+
     .md-bar1 {
       animation: md-progress-linear-indeterminate-scale-1 4s infinite,
-                 md-progress-linear-indeterminate-1 4s infinite;
+      md-progress-linear-indeterminate-1 4s infinite;
     }
+
     .md-bar2 {
       animation: md-progress-linear-indeterminate-scale-2 4s infinite,
-                 md-progress-linear-indeterminate-2 4s infinite;
+      md-progress-linear-indeterminate-2 4s infinite;
     }
   }
 }

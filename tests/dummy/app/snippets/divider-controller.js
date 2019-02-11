@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
 import BaseDemoController from '../controllers/base-demo-controller';
 
 export default BaseDemoController.extend({
   demoName: 'divider',
-  messages: Ember.A([{
+  messages: A([{
     face : 'http://lorempixel.com/50/50/people',
     what: 'Brunch this weekend?',
     who: 'Min Li Chan',

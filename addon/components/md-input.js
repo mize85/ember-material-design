@@ -1,82 +1,84 @@
-import Ember from 'ember';
+import {on} from '@ember/object/evented';
+import {alias} from '@ember/object/computed';
+import TextField from '@ember/component/text-field';
 import LayoutRules from '../mixins/layout-rules';
 import StyleSafe from '../mixins/style-safe';
 
-var MdInputComponent = Ember.TextField.extend(LayoutRules, StyleSafe, {
+var MdInputComponent = TextField.extend(LayoutRules, StyleSafe, {
 
-    classNames: ['md-input'],
+  classNames: ['md-input'],
 
-    inputContainer: Ember.computed.alias('parentView'),
-    value: Ember.computed.alias('parentView.value'),
+  inputContainer: alias('parentView'),
+  value: alias('parentView.value'),
 
-    originalPlaceholder: '',
+  originalPlaceholder: '',
 
-    willDestroyElement() {
-        this._super(...arguments);
-        this.resetContainer();
-    },
+  willDestroyElement() {
+    this._super(...arguments);
+    this.resetContainer();
+  },
 
-    didInsertElement() {
-        this._super(...arguments);
-        this.setupPlaceholder();
-    },
+  didInsertElement() {
+    this._super(...arguments);
+    this.setupPlaceholder();
+  },
 
-    setupPlaceholder() {
+  setupPlaceholder() {
 
-        this.set('originalPlaceholder', this.get('placeholder'));
+    this.set('originalPlaceholder', this.get('placeholder'));
 
-        if (!this.get('inputContainer') || !this.get('placeholder')) {
-            return;
-        }
+    if (!this.get('inputContainer') || !this.get('placeholder')) {
+      return;
+    }
 
-        if (typeof this.get('inputContainer.md-no-float') !== 'undefined') {
+    if (typeof this.get('inputContainer.md-no-float') !== 'undefined') {
 
-            return;
-        }
+      return;
+    }
 
-        this.set('inputContainer.placeholder', this.get('placeholder'));
-        //var placeholderText = this.get('placeholder');
-        //
-        //this.get('inputContainer').$().append('<div class="md-placeholder">' + this.get('placeholder') + '</div>');
-        //
-        //// we don't need this on the element anymore, so get rid of it
-        this.set('placeholder', '');
-        this.$().attr('placeholder', null);
+    this.set('inputContainer.placeholder', this.get('placeholder'));
+    //var placeholderText = this.get('placeholder');
+    //
+    //this.get('inputContainer').$().append('<div class="md-placeholder">' + this.get('placeholder') + '</div>');
+    //
+    //// we don't need this on the element anymore, so get rid of it
+    this.set('placeholder', '');
+    this.$().attr('placeholder', null);
 
-        var inputContainerJquery = this.get('inputContainer').$();
-        if (inputContainerJquery.find('label').length === 0) {
-            var placeHolder = '<label>' + this.get('originalPlaceholder') + '</label>';
-            this.set('inputContainer.mdIconFloat', true);
-            inputContainerJquery.prepend(placeHolder);
-        }
+    var inputContainerJquery = this.get('inputContainer').$();
+    if (inputContainerJquery.find('label').length === 0) {
+      var placeHolder = '<label>' + this.get('originalPlaceholder') + '</label>';
+      this.set('inputContainer.mdIconFloat', true);
+      inputContainerJquery.prepend(placeHolder);
+    }
 
-        this.processInput();
+    this.processInput();
 
-    },
+  },
 
 
-    resetContainer() {
-        this.get('inputContainer').set('isFocused', false);
-    },
+  resetContainer() {
+    this.get('inputContainer').set('isFocused', false);
+  },
 
-    setFocused: Ember.on('focusIn', 'focusOut', function(ev) {
-        var focused = ev.type === 'focusin';
-        this.get('inputContainer').set('isFocused', focused);
-        if (ev.type === 'focusout') {
-          this.get('inputContainer').set('isTouched', true);
-        }
-    }),
+  setFocused: on('focusIn', 'focusOut', function (ev) {
+    var focused = ev.type === 'focusin';
+    this.get('inputContainer').set('isFocused', focused);
+    if (ev.type === 'focusout') {
+      this.get('inputContainer').set('isTouched', true);
+    }
+  }),
 
-    processInput: Ember.on('input', function() {
+  processInput: on('input', function () {
 
-        if (this.get('value') && this.get('value').length > 0) {
-            this.get('inputContainer').set('value', this.get('value'));
-            this.set('inputContainer.placeholder', '');
+    if (this.get('value') && this.get('value').length > 0) {
+      this.get('inputContainer').set('value', this.get('value'));
+      this.set('inputContainer.placeholder', '');
 
-        } else {
-            this.get('inputContainer').set('placeholder', this.get('originalPlaceholder'));
-        }
-    })
+    } else {
+      this.get('inputContainer').set('placeholder', this.get('originalPlaceholder'));
+    }
+  })
 
 });
 

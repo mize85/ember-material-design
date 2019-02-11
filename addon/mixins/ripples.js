@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import {inject as service} from '@ember/service';
+import Mixin from '@ember/object/mixin';
 
-var RipplesMixin = Ember.Mixin.create({
-    rippleService: Ember.inject.service('ripple')
+var RipplesMixin = Mixin.create({
+  rippleService: service('ripple')
 });
 
 export default RipplesMixin;

@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 
-var ApplicationRoute = Ember.Route.extend({
+var ApplicationRoute = Route.extend({
 
   actions: {
     showInterimElement(elementName, context) {

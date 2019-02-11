@@ -47,8 +47,9 @@ md-sidenav {
   &.md-locked-open-remove {
     position: static;
     display: flex;
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
   }
+
   &.md-locked-open {
     width: $sidenav-default-width;
     min-width: $sidenav-default-width;
@@ -67,7 +68,7 @@ md-sidenav {
 
   &.md-locked-open-remove-active {
     transition: width $swift-ease-in-duration $swift-ease-in-timing-function,
-                min-width $swift-ease-in-duration $swift-ease-in-timing-function;
+    min-width $swift-ease-in-duration $swift-ease-in-timing-function;
     //width: 0;
     //min-width: 0;
   }
@@ -80,7 +81,7 @@ md-sidenav {
 
   &.md-closed.md-locked-open-add-active {
     transition: width $swift-ease-in-duration $swift-ease-in-timing-function,
-                min-width $swift-ease-in-duration $swift-ease-in-timing-function;
+    min-width $swift-ease-in-duration $swift-ease-in-timing-function;
     width: $sidenav-default-width;
     min-width: $sidenav-default-width;
     transform: translate3d(0%, 0, 0);
@@ -97,6 +98,7 @@ md-sidenav {
   left: 0;
   top: 0;
   transform: translate3d(0%, 0, 0);
+
   &.md-closed {
     transform: translate3d(-100%, 0, 0);
   }
@@ -106,6 +108,7 @@ md-sidenav {
   left: 100%;
   top: 0;
   transform: translate3d(-100%, 0, 0);
+
   &.md-closed {
     transform: translate3d(0%, 0, 0);
   }

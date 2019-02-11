@@ -1,9 +1,13 @@
-import Ember from 'ember';
+import {run} from '@ember/runloop';
+import {classify} from '@ember/string';
+import {A} from '@ember/array';
+import {computed} from '@ember/object';
+import Service from '@ember/service';
 
-var MediaQueriesService = Ember.Service.extend({
+var MediaQueriesService = Service.extend({
 
-  matches: Ember.computed(function() {
-    return Ember.A();
+  matches: computed(function () {
+    return A();
   }),
 
   /**
@@ -17,9 +21,7 @@ var MediaQueriesService = Ember.Service.extend({
   mql: window.matchMedia,
 
   match(name, query) {
-    var classify = Ember.String.classify,
-      matcher = (this.get('mql') || window.matchMedia)(query),
-      isser = 'is' + classify(name);
+    var matcher = (this.get('mql') || window.matchMedia)(query), isser = 'is' + classify(name);
 
     var listener = matcher => {
       this.set(name, matcher);
@@ -36,7 +38,7 @@ var MediaQueriesService = Ember.Service.extend({
 
     if (matcher.addListener) {
       matcher.addListener(matcher => {
-        Ember.run(null, listener, matcher);
+        run(null, listener, matcher);
       });
     }
 

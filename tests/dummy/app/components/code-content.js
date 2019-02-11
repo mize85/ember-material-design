@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import layout from '../templates/components/code-content';
 
 
-var CodeContentComponent = Ember.Component.extend({
+var CodeContentComponent = Component.extend({
 
     layout: layout
 

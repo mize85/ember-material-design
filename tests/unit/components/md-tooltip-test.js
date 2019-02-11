@@ -1,3 +1,5 @@
+import { run, later } from '@ember/runloop';
+import $ from 'jquery';
 import {
     moduleForComponent,
     test
@@ -15,7 +17,7 @@ var template = Ember.HTMLBars.compile(
     'test'
 );
 
-var rootElement = Ember.$(config.APP.rootElement);
+var rootElement = $(config.APP.rootElement);
 
 test('it renders', function(assert) {
 
@@ -43,11 +45,11 @@ test('it is visible on mouseover', function(assert) {
 
     this.render();
 
-    var e = Ember.$.Event('mouseenter');
-    Ember.run(() => {
-        Ember.$(component.get('parent')).trigger(e);
+    var e = $.Event('mouseenter');
+    run(() => {
+        $(component.get('parent')).trigger(e);
 
-        Ember.run.later(this, () => {
+        later(this, () => {
             assert.equal(component.get('visible'), true);
         }, 1);
     });
@@ -66,23 +68,23 @@ test('it becomes invisible on mouseleave', function(assert) {
 
     this.render();
 
-    var e = Ember.$.Event('mouseenter');
-    Ember.run(() => {
-        Ember.$(component.get('parent')).trigger(e);
+    var e = $.Event('mouseenter');
+    run(() => {
+        $(component.get('parent')).trigger(e);
 
-        Ember.run.later(this, () => {
+        later(this, () => {
             assert.equal(component.get('visible'), true, 'Tooltip is visible');
         }, 5);
     });
 
-    Ember.run(() => {
-        var e2 = Ember.$.Event('mouseleave');
-        Ember.run.later(this, () => {
-            Ember.$(component.get('parent')).trigger(e2);
+    run(() => {
+        var e2 = $.Event('mouseleave');
+        later(this, () => {
+            $(component.get('parent')).trigger(e2);
         }, 10);
     });
 
-    Ember.run.later(this, () => {
+    later(this, () => {
         assert.equal(component.get('visible'), false, 'Tooltip is hidden');
         done();
     }, 20);
@@ -104,10 +106,10 @@ test('it should wait for delay before being visible on mouseenter', function(ass
 
     this.render();
 
-    var e = Ember.$.Event('mouseenter');
+    var e = $.Event('mouseenter');
 
-    Ember.run(() => {
-        Ember.$(component.get('parent')).trigger(e);
+    run(() => {
+        $(component.get('parent')).trigger(e);
         assert.equal(component.get('visible'), false, 'Tooltip still invisible');
 
         setTimeout(() => {
@@ -126,12 +128,12 @@ test('it should show if setVisible is set to true', function(assert) {
 
     this.render();
 
-    Ember.run(() => {
+    run(() => {
         component.set('visible', true);
     });
 
-    Ember.run.later(this, () => {
-        var tooltipContent = Ember.$(document.body).find('md-tooltip').find('.md-content');
+    later(this, () => {
+        var tooltipContent = $(document.body).find('md-tooltip').find('.md-content');
         assert.ok(tooltipContent.hasClass('md-show'), 'Tooltip is visible');
     }, 2);
 

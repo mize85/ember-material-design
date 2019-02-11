@@ -1,3 +1,5 @@
+import Evented, {on} from '@ember/object/evented';
+import Mixin from '@ember/object/mixin';
 import Ember from 'ember';
 import {assign} from '@ember/polyfills';
 
@@ -9,8 +11,8 @@ function getEventPoint(ev) {
 }
 
 function makeStartPointer(ev) {
-  var point = getEventPoint(ev);
-  var startPointer = {
+  const point = getEventPoint(ev);
+  const startPointer = {
     startTime: +Date.now(),
     target: ev.target,
     // 'p' for pointer, 'm' for mouse, 't' for touch
@@ -97,12 +99,12 @@ GestureHandler.prototype = {
 };
 
 
-var GestureEventsMixin = Ember.Mixin.create(Ember.Evented, {
+var GestureEventsMixin = Mixin.create(Evented, {
 
 
   handlers: {},
 
-  gestureStart: Ember.on('mouseDown', 'touchStart', 'pointerDown', function (ev) {
+  gestureStart: on('mouseDown', 'touchStart', 'pointerDown', function (ev) {
     // if we're already touched down, abort
     if (pointer) {
       return;
@@ -120,7 +122,7 @@ var GestureEventsMixin = Ember.Mixin.create(Ember.Evented, {
 
   }),
 
-  gestureMove: Ember.on('mouseMove', 'touchMove', 'pointerMove', function (ev) {
+  gestureMove: on('mouseMove', 'touchMove', 'pointerMove', function (ev) {
     if (!pointer || !typesMatch(ev, pointer)) {
       return;
     }
@@ -129,7 +131,7 @@ var GestureEventsMixin = Ember.Mixin.create(Ember.Evented, {
     this.runHandlers('move', ev);
   }),
 
-  gestureEnd: Ember.on('mouseUp', 'mouseLeave', 'touchEnd', 'touchCancel', 'pointerUp', 'pointerCancel', function (ev) {
+  gestureEnd: on('mouseUp', 'mouseLeave', 'touchEnd', 'touchCancel', 'pointerUp', 'pointerCancel', function (ev) {
     if (!pointer || !typesMatch(ev, pointer)) {
       return;
     }
@@ -150,15 +152,15 @@ var GestureEventsMixin = Ember.Mixin.create(Ember.Evented, {
     this.handlers[name] = handler;
   },
 
-  pressStart: Ember.on('press.start', function () {
+  pressStart: on('press.start', function () {
 
   }),
 
-  pressOnStart: Ember.on('press.onStart', function (ev) {
+  pressOnStart: on('press.onStart', function (ev) {
     this.trigger('$md.pressdown', ev);
   }),
 
-  pressOnEnd: Ember.on('press.onEnd', function (ev) {
+  pressOnEnd: on('press.onEnd', function (ev) {
     this.trigger('$md.pressup', ev);
   })
 

@@ -1,82 +1,85 @@
-import Ember from 'ember';
+import {htmlSafe} from '@ember/string';
+import {computed} from '@ember/object';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 import LayoutRules from '../mixins/layout-rules';
 
 function makeTransform(value) {
-    var scale = value / 100;
-    var translateX = (value - 100) / 2;
-    return 'translateX(' + translateX.toString() + '%) scale(' + scale.toString() + ', 1)';
+  var scale = value / 100;
+  var translateX = (value - 100) / 2;
+  return 'translateX(' + translateX.toString() + '%) scale(' + scale.toString() + ', 1)';
 }
 
-var MdProgressLinear = Ember.Component.extend(LayoutRules, {
+var MdProgressLinear = Component.extend(LayoutRules, {
 
-    isInserted: false,
+  isInserted: false,
 
-    init() {
-        this._super(...arguments);
-        this.setupTransforms();
-    },
+  init() {
+    this._super(...arguments);
+    this.setupTransforms();
+  },
 
-    didInsertElement() {
-        this._super(...arguments);
+  didInsertElement() {
+    this._super(...arguments);
 
-        this.set('isInserted', true);
-        this.$('.md-container').addClass('md-ready');
-    },
+    this.set('isInserted', true);
+    this.$('.md-container').addClass('md-ready');
+  },
 
-    constants: Ember.inject.service('constants'),
+  constants: service('constants'),
 
-    tagName: 'md-progress-linear',
+  tagName: 'md-progress-linear',
 
-    attributeBindings: ['md-mode', 'md-buffer-value'],
+  attributeBindings: ['md-mode', 'md-buffer-value'],
 
-    transforms: new Array(101),
+  transforms: new Array(101),
 
-    setupTransforms() {
-        for (var i = 0; i < 101; i++) {
-            this.transforms[i] = makeTransform(i);
-        }
+  setupTransforms() {
+    for (var i = 0; i < 101; i++) {
+      this.transforms[i] = makeTransform(i);
+    }
 
-    },
+  },
 
-    bar1Style: Ember.computed('clampedBufferValue', function() {
-        return new Ember.String.htmlSafe(this.get('constants.CSS.TRANSFORM') + ': ' + this.transforms[this.get('clampedBufferValue')]);
-    }),
+  bar1Style: computed('clampedBufferValue', function () {
+    return new htmlSafe(this.get('constants.CSS.TRANSFORM') + ': ' + this.transforms[this.get('clampedBufferValue')]);
+  }),
 
-    bar2Style: Ember.computed('clampedValue', function() {
+  bar2Style: computed('clampedValue', function () {
 
-        if (this.get('md-mode') === 'query') {
-            return new Ember.String.htmlSafe('');
-        }
+    if (this.get('md-mode') === 'query') {
+      return new htmlSafe('');
+    }
 
-        return new Ember.String.htmlSafe(this.get('constants.CSS.TRANSFORM') + ': ' + this.transforms[this.get('clampedValue')]);
-    }),
+    return new htmlSafe(this.get('constants.CSS.TRANSFORM') + ': ' + this.transforms[this.get('clampedValue')]);
+  }),
 
-    clampedValue: Ember.computed('value', function() {
+  clampedValue: computed('value', function () {
 
-        var value = this.get('value');
-        if (value > 100) {
-            return 100;
-        }
+    var value = this.get('value');
+    if (value > 100) {
+      return 100;
+    }
 
-        if (value < 0) {
-            return 0;
-        }
+    if (value < 0) {
+      return 0;
+    }
 
-        return Math.ceil(value || 0);
-    }),
+    return Math.ceil(value || 0);
+  }),
 
-    clampedBufferValue: Ember.computed('md-buffer-value', function() {
-        var value = this.get('md-buffer-value');
-        if (value > 100) {
-            return 100;
-        }
+  clampedBufferValue: computed('md-buffer-value', function () {
+    var value = this.get('md-buffer-value');
+    if (value > 100) {
+      return 100;
+    }
 
-        if (value < 0) {
-            return 0;
-        }
+    if (value < 0) {
+      return 0;
+    }
 
-        return Math.ceil(value || 0);
-    })
+    return Math.ceil(value || 0);
+  })
 
 });
 

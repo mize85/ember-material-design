@@ -82,10 +82,12 @@ md-toolbar {
     margin-top: 0;
     margin-bottom: 0;
   }
-  &> .md-button:first-child {
+
+  & > .md-button:first-child {
     margin-left: $icon-button-margin-offset;
   }
-  &> .md-button:last-child {
+
+  & > .md-button:last-child {
     margin-right: $icon-button-margin-offset;
   }
 

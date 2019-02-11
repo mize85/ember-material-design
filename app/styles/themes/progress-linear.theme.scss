@@ -28,14 +28,17 @@ md-progress-linear {
       .md-bar1 {
         background-color: color($warn, '100');
       }
+
       .md-dashed:before {
         background: radial-gradient(color($warn, '100') 0%, color($warn, '100') 16%, transparent 42%);
       }
     }
+
     &.md-accent {
       .md-bar1 {
         background-color: color($accent, '100');
       }
+
       .md-dashed:before {
         background: radial-gradient(color($accent, '100') 0%, color($accent, '100') 16%, transparent 42%);
       }

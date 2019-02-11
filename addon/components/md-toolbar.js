@@ -1,12 +1,12 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import LayoutRules from '../mixins/layout-rules';
 
-var MdToolbar = Ember.Component.extend(LayoutRules, {
+var MdToolbar = Component.extend(LayoutRules, {
   tagName: ['md-toolbar'],
 
   shrinkSpeedFactor: 0.5,
 
-  setupScrollShrink: function() {
+  setupScrollShrink: function () {
   }
 });
 
