@@ -1,8 +1,9 @@
-/*jshint node:true*/
-/* global require, module */
-var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+'use strict';
 
-module.exports = function(defaults) {
+const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+const nodeSass = require('node-sass');
+
+module.exports = function (defaults) {
   var app = new EmberAddon(defaults, {
     // Add options here
 
@@ -18,6 +19,7 @@ module.exports = function(defaults) {
     },
 
     sassOptions: {
+      implementation: nodeSass,
       sourceMapEmbed: true,
       outputFile: 'dummy.css'
     },

@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import {
-    raw
-    }
-    from 'ic-ajax';
+import request from 'ember-ajax/request';
 
 var config = {
     defaultViewBoxSize: 24
@@ -219,7 +216,7 @@ var IconService = Ember.Service.extend({
         if (this.templateCache[url]) {
             req = Ember.RSVP.Promise.resolve(this.templateCache[url]);
         } else {
-            req = raw(url, {
+            req = request(url, {
                 dataType: 'text'
             });
         }

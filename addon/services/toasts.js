@@ -15,7 +15,7 @@ var ToastService = Ember.Service.extend({
     });
 
     toast.opening = true;
-    var newToast = Toast.createWithMixins(toast);
+    var newToast = Toast.create(toast);
 
     var delay = existingToasts.length > 0 ? 400 : 0;
 
