@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import RippleMixin from '../mixins/ripples';
 import LayoutRules from '../mixins/layout-rules';
+import { assign } from '@ember/polyfills';
 
 var MdTabs = Ember.Component.extend(Ember.Evented, LayoutRules, RippleMixin, {
     tagName: 'md-tabs',
@@ -254,7 +255,7 @@ var MdTabs = Ember.Component.extend(Ember.Evented, LayoutRules, RippleMixin, {
                     return !self.get('lastClick') && self.get('hasFocus') && this.getIndex() === self.get('focusIndex');
                 }
             },
-            tab = Ember.merge(proto, tabData);
+            tab = assign(proto, tabData);
 
         if (typeof tabData.tabContent !== 'string') {
             self.set('hasContent', false);

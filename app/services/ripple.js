@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { assign } from '@ember/polyfills';
 //import { START_EVENTS, END_EVENTS } from '../utils/constants';
 
 /**
@@ -103,7 +104,7 @@ var RippleService = Ember.Service.extend({
     },
 
     attachCheckboxBehavior(element, options) {
-        return this.attach(element, Ember.merge({
+        return this.attach(element, assign({
             center: true,
             dimBackground: false,
             fitRipple: true
@@ -111,7 +112,7 @@ var RippleService = Ember.Service.extend({
     },
 
     attachTabBehavior(element, options) {
-        return this.attach(element, Ember.merge({
+        return this.attach(element, assign({
             center: false,
             dimBackground: true,
             outline: false,
@@ -120,7 +121,7 @@ var RippleService = Ember.Service.extend({
     },
 
     attachListControlBehavior(element, options) {
-        return this.attach(element, Ember.merge({
+        return this.attach(element, assign({
             center: false,
             dimBackground: true,
             outline: false,
@@ -135,7 +136,7 @@ var RippleService = Ember.Service.extend({
             return Ember.K;
         }
 
-        options = Ember.merge({
+        options = assign({
             colorElement: element,
             mousedown: true,
             hover: true,
